@@ -26,6 +26,114 @@ app.use(session({
 
 app.use(loginMiddleware);  // calling the loginhelper on EVERY REQUEST!
 
+
+/***** ROOT  ******/
+
+app.get("/", function (req,res){
+  res.redirect("/users");
+});
+
+/*********** LOGIN AND SIGN UP ***************
+*********************************************/
+
+app.get("/signup", function (req,res){
+  res.render("users/signup");
+});
+
+app.post("/signup", function (req,res){
+  var newUser = req.body.user;
+  db.User.create(newUser, function (err,user){
+    console.log(user);
+    if(user){
+      req.login(user);
+      res.redirect("/"); //redirect user to homepage
+    }else{
+      console.log(err);
+      res.redirect("/signup");
+    }
+  });
+});
+
+
+
+
+
+
+
+
+
+/*************** USERS ******************
+***************************************/
+
+
+//INDEX
+app.get("/users", function (req,res){
+  res.render("users/index");
+});
+
+//NEW
+app.get("/users/new", function (req,res){
+});
+
+//SHOW
+app.get("/users/:id", function (req,res){
+});
+
+//EDIT
+app.get("/users/:id/edit", function (req,res){
+});
+
+//CREATE
+app.post("/users", function (req,res){
+});
+
+//UPDATE
+app.put("/users/:id", function (req,res){
+});
+
+//DESTROY
+app.delete("/users/:id", function (req,res){
+});
+
+
+/*************** LOGS ******************
+***************************************/
+
+//ROOT
+app.get("/", function (req,res){
+});
+
+//INDEX
+app.get("/users/:user_id/posts", function (req,res){
+});
+
+//NEW
+app.get("/users/:user_id/posts/new", function (req,res){
+});
+
+//SHOW
+app.get("/users/:user_id/posts/:id", function (req,res){
+});
+
+//EDIT
+app.get("/users/:user_id/posts/:id/edit", function (req,res){
+});
+
+//CREATE
+app.post("/users/:user_id/posts", function (req,res){
+});
+
+//UPDATE
+app.put("/users/:user_id/posts/:id", function (req,res){
+});
+
+//DESTROY
+app.delete("/users/:user_id/posts/:id", function (req,res){
+});
+
+/**** 404 CATCH-ALL ******
+*************************/
+
 app.get('*', function(req,res){
   res.render('404');
 });
