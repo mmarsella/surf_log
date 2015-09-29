@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Surf Log</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+
+<script src='/bower_components/jquery/dist/jquery.min.js'></script>
+<link rel='stylesheet' href='/bower_components/fullcalendar/dist/fullcalendar.css' />
+
+ <!--  // <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
+
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   
@@ -13,8 +19,34 @@
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-  <link rel="stylesheet" href="/show.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+    
+
+<!--************** FULL CALENDAR ************* ****************************************** -->
+
+
+<script src='/bower_components/moment/min/moment.min.js'></script>
+
+<script src='/bower_components/fullcalendar/dist/fullcalendar.js'></script>
+
+
+  <script>$(document).ready(function() {
+
+    // page is now ready, initialize the calendar...
+
+    $('#calendar').fullCalendar({
+        // put your options and callbacks here
+    });
+
+});</script>
+
+<!-- **********************************************-->
+
+<link rel="stylesheet" href="/show.css">
+
 </head>
+
+
 <body class="container">
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -43,7 +75,8 @@
 <div class="row top">
     <div class="col-xs-2 side"></div>
     <div class="col-xs-8 text-center calendar">
-        This is where the calendar will be.
+    <div id="calendar"></div>
+
     </div>
     <div class="col-xs-2 side"></div>
 </div>
