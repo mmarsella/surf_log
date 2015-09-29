@@ -11,6 +11,9 @@ var logSchema = new mongoose.Schema({
     type:mongoose.Schema.Types.ObjectId,
     ref:"User"
   }
+// Nest the forecast within the log
+// EMBED!  Do not reference.  
+// I want to persist this data in the log, b/c the forecast will change constantly
 });
 
 /******** EXPORTS *********/

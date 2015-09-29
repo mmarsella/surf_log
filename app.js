@@ -26,11 +26,10 @@ app.use(session({
 
 app.use(loginMiddleware);  // calling the loginhelper on EVERY REQUEST!
 
-
 /***** ROOT  ******/
 
 app.get("/", function (req,res){
-  res.redirect("/users");
+  res.redirect("/login");
 });
 
 /*********** LOGIN AND SIGN UP ***************
@@ -54,12 +53,27 @@ app.post("/signup", function (req,res){
   });
 });
 
+app.get("/login", function (req,res){
+  res.render("users/login");
+});
 
+app.post("/login", function (req,res){
+  db.User.authenticate(req.body.user,
+    function (err,user){
+      console.log("THE USER: " + user);
+      if(!err && user !== null){
+        req.login(user);
+        res.redirect("/");
+      }else{
+        res.redirect("/users");
+      }
+    });
+});
 
-
-
-
-
+app.get("/logout", function (req,res){
+  req.logout();
+  res.redirect("/");
+});
 
 
 /*************** USERS ******************
@@ -68,6 +82,7 @@ app.post("/signup", function (req,res){
 
 //INDEX
 app.get("/users", function (req,res){
+  res.locals.name = "elie";
   res.render("users/index");
 });
 

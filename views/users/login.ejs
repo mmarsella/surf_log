@@ -1,0 +1,48 @@
+<% include ../partials/header %>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">SURF LOG</a>
+    </div>
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">
+      <% if(currentUser) {%>
+  Welcome, <%= currentUser.name%>
+<% }%></a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav navbar-right">
+    <% if(!currentUser) {%>
+        <li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li> 
+    <% } else { %>
+
+         <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="row">
+    <div class="col-xs-3 filler"></div>
+    <div class="col-xs-6">
+      <form action="/login" class="text-center" method="POST">
+        <h1>LOG IN!</h1>
+          <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">Name</span>
+          <input type="text" class="form-control" placeholder="Name.." aria-describedby="basic-addon1"name="user[name]" id="name" required>
+        </div>
+          <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">EMAIL</span>
+          <input type="text" class="form-control" placeholder="Your email..." aria-describedby="basic-addon1"name="user[email]" id="email" required>
+        </div>
+          <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">Password</span>
+          <input type="password" class="form-control" placeholder="Password..." aria-describedby="basic-addon1"name="user[password]" id="password" required>
+        </div>
+        <br>
+        <button class="btn-lg btn-success">LOG IN</button>
+      </form>
+    </div>
+    <div class="col-xs-3 filler"></div>
+<% include ../partials/footer %>
