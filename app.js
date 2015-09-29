@@ -63,7 +63,7 @@ app.post("/login", function (req,res){
       console.log("THE USER: " + user);
       if(!err && user !== null){
         req.login(user);
-        res.redirect("/");
+        res.redirect("/users/" + user._id);
       }else{
         res.redirect("/users");
       }
@@ -82,16 +82,19 @@ app.get("/logout", function (req,res){
 
 //INDEX
 app.get("/users", function (req,res){
-  res.locals.name = "elie";
+  // res.locals.name = "elie";
   res.render("users/index");
 });
 
 //NEW
-app.get("/users/new", function (req,res){
-});
+// app.get("/users/new", function (req,res){
+// });
 
-//SHOW
+//SHOW  --> User Homepage
 app.get("/users/:id", function (req,res){
+  db.User.findById(req.params.id, function (err, user){
+    res.render("users/show",{user:user});
+  });
 });
 
 //EDIT
