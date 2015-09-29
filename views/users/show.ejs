@@ -31,11 +31,25 @@
 
 
   <script>$(document).ready(function() {
+    var date = new Date();
+    var d = date.getDate();
+    var m = date.getMonth();
+    var y = date.getFullYear();
 
     // page is now ready, initialize the calendar...
 
     $('#calendar').fullCalendar({
         // put your options and callbacks here
+        editable:true,
+        weekMode: 'liquid',
+        url: '#',
+        events: [ 
+        {
+            title: "Ocean Beach",
+            start: new Date(y, m, 1, 9, 00),
+           
+            allDay:false
+        }]
     });
 
 });</script>
