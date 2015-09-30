@@ -1,0 +1,32 @@
+<% include ../partials/header %>
+<div class="row">
+    <div class="col-xs-3 filler"></div>
+    <div class="col-xs-6">
+      <form action="/logs" class="text-center" method="POST">
+        <h1>New Surf Log</h1>
+          <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">Time</span>
+          <input type="time" class="form-control" placeholder="When did you get in.." aria-describedby="basic-addon1"name="log[time]" id="time" required>
+        </div>
+          <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">Duration</span>
+          <input type="number" class="form-control" placeholder="In minutes..." aria-describedby="basic-addon1"name="log[duration]" id="duration" required>
+        </div>
+           <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">Rating</span>
+          <input type="number" class="form-control" placeholder="1-10" aria-describedby="basic-addon1"name="log[rating]" id="rating" required>
+        </div>
+          <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">Description</span>
+          <input type="text" class="form-control" placeholder="Brief desc.." aria-describedby="basic-addon1"name="log[description]" id="description" required>
+        </div>
+             <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">Location</span>
+          <input type="text" class="form-control" placeholder="What spot.." aria-describedby="basic-addon1"name="log[location]" id="location" required>
+        </div>
+        <br>
+        <button class="btn-lg btn-success">POST</button>
+      </form>
+    </div>
+    <div class="col-xs-3 filler"></div>
+<% include ../partials/footer %>

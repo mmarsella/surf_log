@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 var User = require("./user");
 
 var logSchema = new mongoose.Schema({
-  time:Date,
+  time:String,
   duration:Number,
   rating:Number,
   description:String,
