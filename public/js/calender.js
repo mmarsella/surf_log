@@ -6,6 +6,39 @@ $(document).ready(function() {
 
     // page is now ready, initialize the calendar...
 
+
+/*********
+
+FOR WED
+
+1)  FIGURE OUT HOW TO ADD EVENTS OBJECTS TO THE CALENDAR BY ACCESSIING THE HIDDEN INPUT VALUES IN THE DOM
+
+2)  Connect to the spitcast API to populate the logs.
+
+3)  Chart.js to create user statistics based on the "more verbose" logs after the forecasts are added to the logs.
+
+4)  Create show-page on-click of a calendar entry
+
+5)  Re-design homepage
+
+******************************/
+
+
+
+    /***** MAKING A NEW CALENDAR EVENT   ***********/
+    var logSource = new Object();
+    logSource.title = 'PACHECO'; // this should be string
+    logSource.start = new Date(y, m, 2, 10, 00); // this should be date object
+
+    var log = new Array();
+    log[0] = logSource;
+    /************************************************/
+
+    
+
+
+
+
     $('#calendar').fullCalendar({
         // put your options and callbacks here
         dayClick: function (){
@@ -33,5 +66,11 @@ $(document).ready(function() {
         ]
 
     });
+
+    $('#calendar').fullCalendar('addEventSource', log);
+    $('#calendar').fullCalendar('renderEvents');
+       
+
+
 
 });
