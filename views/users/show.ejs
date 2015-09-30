@@ -29,50 +29,14 @@
 
 <script src='/bower_components/fullcalendar/dist/fullcalendar.js'></script>
 
-
-  <script>$(document).ready(function() {
-    var date = new Date();
-    var d = date.getDate();
-    var m = date.getMonth();
-    var y = date.getFullYear();
-
-    // page is now ready, initialize the calendar...
-
-    $('#calendar').fullCalendar({
-        // put your options and callbacks here
-        dayClick: function (){
-            alert("DAY IS CLICKED!");  // use this call-back to render the indiv show page.
-        },
-        editable:true,
-        weekMode: 'liquid',
-        url: '#',
-
-        //iterate through all logs here and store it into hidden inputs
-          // grab the hidden inputs in the dom w/ jquery
-            // store that info into calendar events to populate calendar
-        events: [ 
-        {
-            title: "Ocean Beach",
-            start: new Date(y, m, 1, 9, 00),
-            url: "https://www.google.com/?gws_rd=ssl",
-            editable:true,
-           
-            allDay:false
-        },
-
-        ]
-
-    });
-
-});</script>
+<!-- CALENDAR LOGIC -->
+  <script type="text/javascript" src="/js/calender.js"></script>
 
 <!-- **********************************************-->
 
 <link rel="stylesheet" href="/show.css">
 
 </head>
-
-
 <body class="container">
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -112,12 +76,22 @@
 
 <div class="row bottom">
     <div class="col-xs-6 text-center" id="report">
-        CURENT REPORT
+        CURRENT REPORT
     </div>
     <div class="col-xs-6 text-center" id="stats">
         USER STATISTICS
     </div>
 </div>
+
+<!-- Hidden form to pass values into calendar.  Will
+grab values w/ jquery. -->
+<form action="">
+     <% logs.forEach(function(log){ %>
+    <input type="hidden" name="log[time]" value="<%=log.time%>"> 
+    <input type="hidden" name="log[location]" value="<%=log.location%>">
+    <%})%>  
+</form>
+
 
 
 
