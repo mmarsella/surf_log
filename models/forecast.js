@@ -14,15 +14,20 @@ var mongoose = require("mongoose");
 /****** FORECAST SCHEMA *******/
 
 var forecastSchema = new mongoose.Schema({
-  height:String,
-  wind:String,
-  direction:String,
-  tide:String,
-  time:String,
-  location:{
-    latitude: Number,
-    longitude: Number
-  }
+  spot_name:String, // "South Ocean Beach"
+  date:String,   // ex "2015-9-30 13"
+  size_ft:Number,  //ex 1.6757142548640278
+  shape:String,  //"pf"
+  tide:String,   //"Poor-fair"
+
+  wind_speed:Number, // http://api.spitcast.com/api/county/wind/san-francisco/?dcat=week
+  direction_degrees:Number,
+  direction_text:String,
+  // time:String,
+  // location:{
+  //   latitude: Number,
+  //   longitude: Number
+  // }
 });
 
 

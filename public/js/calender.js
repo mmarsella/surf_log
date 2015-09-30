@@ -12,28 +12,18 @@ $(document).ready(function() {
 
 
 /*********
-
 FOR WED
-
-1)  FIGURE OUT HOW TO ADD EVENTS OBJECTS TO THE CALENDAR BY ACCESSIING THE HIDDEN INPUT VALUES IN THE DOM
-
 2)  Connect to the spitcast API to populate the logs.
-
 3)  Chart.js to create user statistics based on the "more verbose" logs after the forecasts are added to the logs.
-
 4)  Create show-page on-click of a calendar entry
-
 5)  Re-design homepage
-
 ******************************/
 
  
-
-    
 /******* GRAB HIDDEN INPUT VALUES FROM DOM  **********/
 
-//All hidden time input values
-var timeArray = $('.time').map(function() {return $(this).val(); });
+//All hidden time input values  --> May not need this
+// var timeArray = $('.time').map(function() {return $(this).val(); });
 
 //All hidden location input values
 var locationArray = $('.location').map(function() {return $(this).val(); });
@@ -42,15 +32,17 @@ var locationArray = $('.location').map(function() {return $(this).val(); });
 var dateArray = $('.date').map(function() {return $(this).val(); });
 
 /*******************************************************/
-var log = new Array();
 
-for(var i = 0; i < timeArray.length; i++)
+/***** MAKING A NEW CALENDAR EVENTS   ***********/
+var log = new Array();
+for(var i = 0; i < locationArray.length; i++)
 {
     var logSource = new Object();
     logSource.title = locationArray[i];
     logSource.start = new Date(dateArray[i]);
     log[i] = logSource;
 }
+/************************************************/
 
 // Array that will be rendered in calendar
 
@@ -62,27 +54,14 @@ for(var i = 0; i < timeArray.length; i++)
 
 // parseInt(testTime[0],10);
 
-
-
-/***** MAKING A NEW CALENDAR EVENT   ***********/
-   
  // var logSource = new Object();
  // logSource.title = locationArray[0]; // this should be string
  // logSource.start = new Date(dateArray[0]);
-
  // var logSource2 = new Object();
  // logSource2.title = locationArray[1]; // this should be string
  // logSource2.start = new Date(dateArray[1]);
-
-
-/************************************************/
-
-
 // log[0] = logSource;
 // log[1] = logSource2;
-
-
-
 
 
     $('#calendar').fullCalendar({
@@ -108,13 +87,10 @@ for(var i = 0; i < timeArray.length; i++)
         // ]
     });
 
-    //Will need to remove eventsources before pulling from DOM
-
-    $('#calendar').fullCalendar('removeEventSource', log);
-    $('#calendar').fullCalendar('addEventSource', log);
-    $('#calendar').fullCalendar('renderEvents');
+//Remove eventsources before pulling from DOM
+$('#calendar').fullCalendar('removeEventSource', log);
+//Add Events to cal
+$('#calendar').fullCalendar('addEventSource', log);
+$('#calendar').fullCalendar('renderEvents');
        
-
-
-
 });

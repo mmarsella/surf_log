@@ -20,6 +20,7 @@
     "bcrypt": "^0.8.5",
     "body-parser": "^1.14.1",
     "cookie-session": "^1.2.0",
+    "datejs": "0.0.2",
     "ejs": "^2.3.4",
     "express": "^4.13.3",
     "method-override": "^2.3.5",

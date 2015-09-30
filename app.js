@@ -8,6 +8,7 @@ var session = require("cookie-session");
 var morgan = require("morgan");
 var loginMiddleware = require("./middleware/loginHelper"); //refers to name of file
 var routeMiddleware = require("./middleware/routeHelper");
+var date = require("datejs");
 
 app.set('view engine', 'ejs');
 app.use(methodOverride('_method'));
@@ -163,6 +164,48 @@ app.post("/logs", function (req,res){
         res.redirect("/users/" + req.session.id);
       });
     }
+  });
+});
+
+// Make an API call
+// create forecast documents for a full week in the future
+// 
+
+
+/******** Parse GMT date format to ISOString  ********/
+
+//Date.parse(date).toISOString()
+
+//db.logs.find({date:ISODate(d.toISOString())})
+
+
+/*******************************************************/
+
+app.get("/apiCallTest", function (req,res){
+  console.log("^^^^^^^^^^*****^^^INSIDE THE API CALL!!!");
+  request.get("http://api.spitcast.com/api/spot/forecast/117/?dcat-day", function (err,response,body){
+    var forecast = JSON.parse(body);
+
+    forecast.forEach(function(report){
+
+      var gmtDate = report.gmt;
+
+      var ISODate = Date.parse(gmtDate).toISOString();  //Re-format date field to match log/calendar dates
+
+      db.Forecast.create({
+          spot_name:report.spot_name, // "South Ocean Beach"
+          date:ISODate,   // ex "2015-9-30 13"
+          size_ft:report.size_ft,  //ex 1.6757142548640278
+          shape:report.shape,  //"pf"
+          tide:report.tide   //"Poor-fair"
+      });
+      console.log("CREATED A FORECAST DOC FOR OB!",report);
+    });
+    console.log("*************************************");
+    console.log("FORECAST LENGTH",forecast.length);
+    // console.log(forecast);
+        console.log("*************************************");
+    res.redirect("/users/" + req.session.id);
   });
 });
 
