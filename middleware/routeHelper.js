@@ -25,7 +25,7 @@ var routeHelpers = {
 
   preventLoginSignup: function(req, res, next) {
     if (req.session.id !== null && req.session.id !== undefined) {
-      res.redirect('/');
+      res.redirect('/user' + req.session.id);
     }else {
      return next();
     }

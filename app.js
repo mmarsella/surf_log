@@ -35,7 +35,7 @@ app.get("/", function (req,res){
 /*********** LOGIN AND SIGN UP ***************
 *********************************************/
 
-app.get("/signup", function (req,res){
+app.get("/signup", routeMiddleware.preventLoginSignup, function (req,res){
   res.render("users/signup");
 });
 
@@ -80,9 +80,8 @@ app.get("/logout", function (req,res){
 ***************************************/
 
 
-//INDEX
+// INDEX
 app.get("/users", function (req,res){
-  // res.locals.name = "elie";
   res.render("users/index");
 });
 
@@ -129,7 +128,7 @@ app.get("/users/:id/edit", function (req,res){
 // });
 
 //NEW
-app.get("/logs/new", function (req,res){
+app.get("/logs/new", routeMiddleware.ensureLoggedIn, function (req,res){
   res.render("logs/new");
 });
 
@@ -151,11 +150,13 @@ app.post("/logs", function (req,res){
     }else{
       db.User.findById(req.session.id, function (err,user){
         console.log("****USER: ",user);
+        console.log("***WE ARE MAKING THE LOG");
         user.logs.push(log);  // store log for user
         log.user = user._id;  // log is associated w/ this user
         log.save();
         user.save();
-        res.redirect("/users");
+        console.log("LOG IS SAVED");
+        res.redirect("/users/" + req.session.id);
       });
     }
   });
