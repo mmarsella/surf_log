@@ -4,6 +4,10 @@ $(document).ready(function() {
     var m = date.getMonth();
     var y = date.getFullYear();
 
+
+    console.log("THE DATE", d);
+    console.log("THE MONTH", m);
+    console.log("THE YEAR", y);
     // page is now ready, initialize the calendar...
 
 
@@ -23,18 +27,60 @@ FOR WED
 
 ******************************/
 
-
-
-    /***** MAKING A NEW CALENDAR EVENT   ***********/
-    var logSource = new Object();
-    logSource.title = 'PACHECO'; // this should be string
-    logSource.start = new Date(y, m, 2, 10, 00); // this should be date object
-
-    var log = new Array();
-    log[0] = logSource;
-    /************************************************/
+ 
 
     
+/******* GRAB HIDDEN INPUT VALUES FROM DOM  **********/
+
+//All hidden time input values
+var timeArray = $('.time').map(function() {return $(this).val(); });
+
+//All hidden location input values
+var locationArray = $('.location').map(function() {return $(this).val(); });
+
+//All hidden time input values  --> cal date fields can receive ISO date
+var dateArray = $('.date').map(function() {return $(this).val(); });
+
+/*******************************************************/
+var log = new Array();
+
+for(var i = 0; i < timeArray.length; i++)
+{
+    var logSource = new Object();
+    logSource.title = locationArray[i];
+    logSource.start = new Date(dateArray[i]);
+    log[i] = logSource;
+}
+
+// Array that will be rendered in calendar
+
+var testTime = timeArray[0].split(':');
+
+// testTime[0] = testTime[0].charAt(1);
+// Eliminate leading zero w/ base ten # system
+// if testTime[0] < 10
+
+parseInt(testTime[0],10);
+
+
+
+/***** MAKING A NEW CALENDAR EVENT   ***********/
+   
+ // var logSource = new Object();
+ // logSource.title = locationArray[0]; // this should be string
+ // logSource.start = new Date(dateArray[0]);
+
+ // var logSource2 = new Object();
+ // logSource2.title = locationArray[1]; // this should be string
+ // logSource2.start = new Date(dateArray[1]);
+
+
+/************************************************/
+
+
+// log[0] = logSource;
+// log[1] = logSource2;
+
 
 
 
@@ -47,25 +93,22 @@ FOR WED
         editable:true,
         weekMode: 'liquid',
         url: '#',
-
         //iterate through all logs here and store it into hidden inputs
           // grab the hidden inputs in the dom w/ jquery
             // store that info into calendar events to populate calendar
-
-        events: [ 
-        {
-            title: "Ocean Beach",
-            start: new Date(y, m, 1, 9, 00),
-            url: "https://www.google.com/?gws_rd=ssl",
-            editable:true,
+        // events: [ 
+        // {
+        //     title: "Ocean Beach",
+        //     start: new Date(y, m, 1, 9, 00),
+        //     url: "https://www.google.com/?gws_rd=ssl",
+        //     editable:true,
            
-            allDay:false
-        },
-
-
-        ]
-
+        //     allDay:false
+        // },
+        // ]
     });
+
+    //Will need to remove eventsources before pulling from DOM
 
     $('#calendar').fullCalendar('addEventSource', log);
     $('#calendar').fullCalendar('renderEvents');

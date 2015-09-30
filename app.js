@@ -159,6 +159,7 @@ app.post("/logs", function (req,res){
         log.save();
         user.save();
         console.log("LOG IS SAVED");
+        console.log("^^^^^^ THE DATE ^^^^", log.date);
         res.redirect("/users/" + req.session.id);
       });
     }

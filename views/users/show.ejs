@@ -87,15 +87,11 @@
 grab values w/ jquery. -->
 <form action="">
      <% logs.forEach(function(log){ %>
-    <input type="hidden" name="log[time]" value="<%=log.time%>"> 
-    <input type="hidden" name="log[location]" value="<%=log.location%>">
+     <input type="hidden" name="log[date]" value="<%=log.date%>" class="date">
+    <input type="hidden" name="log[time]" value="<%=log.time%>" class="time"> 
+    <input type="hidden" name="log[location]" value="<%=log.location%>" class="location">
     <%})%>  
 </form>
-
-
-
-
-
 
 
 
