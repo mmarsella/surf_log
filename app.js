@@ -90,10 +90,13 @@ app.get("/users", function (req,res){
 // app.get("/users/new", function (req,res){
 // });
 
-//SHOW  --> User Homepage
+//SHOW  --> USER HOMEPAGE
 app.get("/users/:id", function (req,res){
   db.User.findById(req.params.id, function (err, user){
-    res.render("users/show",{user:user});
+    //db.Log.find(user._id)
+    // and then pass in all logs in hidden ejs inputs in show.ejs
+       // 
+    res.render("users/show",{user:user});  // send in logs
   });
 });
 
@@ -101,36 +104,37 @@ app.get("/users/:id", function (req,res){
 app.get("/users/:id/edit", function (req,res){
 });
 
-//CREATE
-app.post("/users", function (req,res){
-});
+// //CREATE
+// app.post("/users", function (req,res){
+// });
 
-//UPDATE
-app.put("/users/:id", function (req,res){
-});
+// //UPDATE
+// app.put("/users/:id", function (req,res){
+// });
 
-//DESTROY
-app.delete("/users/:id", function (req,res){
-});
+// //DESTROY
+// app.delete("/users/:id", function (req,res){
+// });
 
 
 /*************** LOGS ******************
 ***************************************/
 
 //ROOT
-app.get("/", function (req,res){
-});
+// app.get("/", function (req,res){
+// });
 
 //INDEX
-app.get("/users/:user_id/posts", function (req,res){
-});
+// app.get("/users/:user_id/posts", function (req,res){
+// });
 
 //NEW
-app.get("/users/:user_id/posts/new", function (req,res){
+app.get("/logs/new", function (req,res){
+  res.render("logs/new");
 });
 
 //SHOW
-app.get("/users/:user_id/posts/:id", function (req,res){
+app.get("/logs/:id", function (req,res){
 });
 
 //EDIT
@@ -138,7 +142,23 @@ app.get("/users/:user_id/posts/:id/edit", function (req,res){
 });
 
 //CREATE
-app.post("/users/:user_id/posts", function (req,res){
+app.post("/logs", function (req,res){
+  db.Log.create(req.body.log, function (err, log){
+    console.log("*********THE LOG: ",log);
+    if(err){
+      console.log(err);
+      res.render("404");
+    }else{
+      db.User.findById(req.session.id, function (err,user){
+        console.log("****USER: ",user);
+        user.logs.push(log);  // store log for user
+        log.user = user._id;  // log is associated w/ this user
+        log.save();
+        user.save();
+        res.redirect("/users");
+      });
+    }
+  });
 });
 
 //UPDATE
