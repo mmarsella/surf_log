@@ -92,7 +92,7 @@ app.get("/users", function (req,res){
 //SHOW  --> USER HOMEPAGE
 app.get("/users/:id", function (req,res){
   db.User.findById(req.params.id, function (err, user){
-    db.Log.find(req.session.id, function (err, logs){
+    db.Log.find({user:req.session.id}, function (err, logs){
       console.log("****** ALL THE LOGS:", logs);
       res.render("users/show",{user:user, logs:logs});  // send in logs
     });

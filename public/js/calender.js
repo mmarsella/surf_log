@@ -54,13 +54,13 @@ for(var i = 0; i < timeArray.length; i++)
 
 // Array that will be rendered in calendar
 
-var testTime = timeArray[0].split(':');
+// var testTime = timeArray[0].split(':');
 
 // testTime[0] = testTime[0].charAt(1);
 // Eliminate leading zero w/ base ten # system
 // if testTime[0] < 10
 
-parseInt(testTime[0],10);
+// parseInt(testTime[0],10);
 
 
 
@@ -110,6 +110,7 @@ parseInt(testTime[0],10);
 
     //Will need to remove eventsources before pulling from DOM
 
+    $('#calendar').fullCalendar('removeEventSource', log);
     $('#calendar').fullCalendar('addEventSource', log);
     $('#calendar').fullCalendar('renderEvents');
        
