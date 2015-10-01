@@ -152,16 +152,32 @@ app.post("/logs", function (req,res){
       console.log(err);
       res.render("404");
     }else{
-      db.User.findById(req.session.id, function (err,user){
-        console.log("****USER: ",user);
-        console.log("***WE ARE MAKING THE LOG");
-        user.logs.push(log);  // store log for user
-        log.user = user._id;  // log is associated w/ this user
-        log.save();
-        user.save();
-        console.log("LOG IS SAVED");
-        console.log("^^^^^^ THE DATE ^^^^", log.date);
-        res.redirect("/users/" + req.session.id);
+      //find forecast from forecast name by log_spot_name
+      db.Forecast.find({spot_name: log.location, date: Date.parse(log.date).toISOString()}, function (err, forecast){
+        if(err){
+          console.log(err);
+          res.render("404");
+        }else{
+            //Add forecast data into this LOG!!
+
+            log.size_ft = forecast[0].size_ft;
+            log.shape = forecast[0].shape;
+            // log.tide = forecast[0].tide;
+
+
+            db.User.findById(req.session.id, function (err,user){
+              console.log("****USER: ",user);
+              console.log("***WE ARE MAKING THE LOG");
+              user.logs.push(log);  // store log for user
+              log.user = user._id;  // log is associated w/ this user
+              log.save();
+              user.save();
+              console.log("LOG IS SAVED");
+              console.log("^^^^^^ THE DATE ^^^^", log.date);
+              res.redirect("/users/" + req.session.id);
+            });
+        }
+        // res.send(forecast);
       });
     }
   });
@@ -177,13 +193,15 @@ app.post("/logs", function (req,res){
 //Date.parse(date).toISOString()
 
 //db.logs.find({date:ISODate(d.toISOString())})
-
-
 /*******************************************************/
 
+
+//South OB >> 117
+
+//need to make one more API call to the wind API
 app.get("/apiCallTest", function (req,res){
   console.log("^^^^^^^^^^*****^^^INSIDE THE API CALL!!!");
-  request.get("http://api.spitcast.com/api/spot/forecast/117/?dcat-day", function (err,response,body){
+  request.get("http://api.spitcast.com/api/spot/forecast/117/?dcat=week", function (err,response,body){
     var forecast = JSON.parse(body);
 
     forecast.forEach(function(report){
@@ -195,6 +213,7 @@ app.get("/apiCallTest", function (req,res){
       db.Forecast.create({
           spot_name:report.spot_name, // "South Ocean Beach"
           date:ISODate,   // ex "2015-9-30 13"
+          hour:report.hour,
           size_ft:report.size_ft,  //ex 1.6757142548640278
           shape:report.shape,  //"pf"
           tide:report.tide   //"Poor-fair"

@@ -16,6 +16,7 @@ var mongoose = require("mongoose");
 var forecastSchema = new mongoose.Schema({
   spot_name:String, // "South Ocean Beach"
   date:String,   // ex "2015-9-30 13"
+  hour:String,   //ex 9AM
   size_ft:Number,  //ex 1.6757142548640278
   shape:String,  //"pf"
   tide:String,   //"Poor-fair"

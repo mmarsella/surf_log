@@ -13,6 +13,11 @@ $(document).ready(function() {
 
 /*********
 FOR WED
+
+1) Create Drop down for spot selection
+2) Create drop down for time selection
+
+
 2)  Connect to the spitcast API to populate the logs.
 3)  Chart.js to create user statistics based on the "more verbose" logs after the forecasts are added to the logs.
 4)  Create show-page on-click of a calendar entry
