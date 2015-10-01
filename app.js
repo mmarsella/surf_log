@@ -198,12 +198,18 @@ app.post("/logs", function (req,res){
 /*******************************************************/
 
 
-//South OB >> 117
+// 4) Grab DATA for:
+//    - South Ocean Beach: 117 -
+//    - North Ocean Beach: 114 -
+//    - Kelly's Cove: 697 - 
+//    - Linda Mar: 120 -
+//    - Montara: 121 - 
+//    - Princeton Jetty: 123
 
 //need to make one more API call to the wind API
 app.get("/apiCallTest", function (req,res){
   console.log("^^^^^^^^^^*****^^^INSIDE THE API CALL!!!");
-  request.get("http://api.spitcast.com/api/spot/forecast/114/?dcat=week", function (err,response,body){
+  request.get("http://api.spitcast.com/api/spot/forecast/123/?dcat=week", function (err,response,body){
     var forecast = JSON.parse(body);
 
     forecast.forEach(function(report){

@@ -10,9 +10,9 @@ $(document).ready(function() {
 
 /*********
 FOR WED
+1)  Sync forecast time w/ log entry time
+  -- may need to be written in creation of log/find of forecast for log
 
-1) Create Drop down for spot selection
-2) Create drop down for time selection
 3) Create weekly cron call for API PUll
 4) Grab DATA for:
    - South Ocean Beach: 117

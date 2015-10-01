@@ -24,3 +24,11 @@
     logSource.start = new Date(2015,10,2,12,00,0); //calendar always displays 5pm (17:00:00)
     log[i] = logSource;
 }
+
+
+/*******  TO DO FOR THURSDAY**********/
+
+// 1)  RESOLVE DATE ISSUE FOR CALENDER ENTRIES  
+// 2)  PERFORM ALL API CALLS IN CRON
+// 3)  CHART JS -->  CREATE USER STATISTICS IN SHOW PAGE
+
