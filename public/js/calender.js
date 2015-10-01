@@ -14,13 +14,7 @@ FOR WED
   -- may need to be written in creation of log/find of forecast for log
 
 3) Create weekly cron call for API PUll
-4) Grab DATA for:
-   - South Ocean Beach: 117
-   - North Ocean Beach: 114
-   - Kelly's Cove: 697
-   - Linda Mar: 120
-   - Montara: 121
-   - Princeton Jetty: 123
+
 
 5)  Create some user statistics:
     - Days surfed
@@ -31,6 +25,69 @@ FOR WED
 7)  Create show-page on-click of a calendar entry
 8)  Re-design homepage
 ******************************/
+
+
+
+
+// 3)  Take that data, make a db query
+// 4)  Respond with json (res.format)
+// 5)  Put response data on page
+
+/***** CURRENT FORECAST ********/
+
+// 1) Onchange, grab value (use jQuery)
+
+var currentVal = $('.form-control').val();  
+
+// 2)  Send that value to the server (AJAX)
+$("#select").on("change", function(e){
+        currentVal = $('.form-control').val(); 
+       $.ajax({
+        url: "/forecast",
+        dataType: "json",
+        method: "GET",
+        // data is what we are passing to the server.  // will be req.query.value on the back end
+        data: {
+            value: currentVal
+        }
+    }).done(function(serverResponse){
+        console.log(serverResponse)
+    }).fail(function(err){
+        console.log("SOMETHING WENT WRONG",err);
+    });
+    // $('.form-control').val();
+    console.log("This changed!");
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /******* GRAB HIDDEN INPUT VALUES FROM DOM  **********/
 

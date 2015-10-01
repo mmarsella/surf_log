@@ -78,6 +78,75 @@ app.get("/logout", function (req,res){
 });
 
 
+/************* CURRENT FORECAST  *****************/
+
+// Grab DATA for:
+//    - South Ocean Beach: 117 -
+//    - North Ocean Beach: 114 -
+//    - Kelly's Cove: 697 - 
+//    - Linda Mar: 120 -
+//    - Montara: 121 - 
+//    - Princeton Jetty: 123
+function spotId(spot){
+  if(spot === "South Ocean Beach"){
+    return 117;
+  }else if(spot === "North Ocean Beach"){
+    return 114;
+  }else if(spot === "Kellys Cove"){
+    return 697;
+  }else if(spot === "Linda Mar"){
+    return 120;
+  }else if(spot === "Montara"){
+    return 121;
+  }else if(spot === "Princeton Jetty"){
+    return 123;
+  }else{}
+}
+
+
+app.get("/forecast", function(req,res){
+
+  var spot = spotId(req.query.value);
+
+ // date = Date.today();
+ // console.log("THE DATE:",date);
+ // date = date.toISOString();
+ //  console.log("THIS IS FROM AJAX!", date);
+
+  // make a db call with req.query.value
+  // respond with some json
+  // CHECK OUT RES.FORMAT
+
+    console.log("THE VALUE: ",req.query.value);
+    console.log("The SPOT ID ",spot);
+
+    request.get("http://api.spitcast.com/api/spot/forecast/"+ spot + "/?dcat=week", function (err,response,body){
+
+    var currentForecast = JSON.parse(body);
+
+    console.log("The report for " + req.query.value + ":" + currentForecast[0].hour);
+  res.format({
+
+  'application/json': function(){
+    res.send(currentForecast[11]);
+  },
+
+  'default': function() {
+    // log the request and respond with 406
+    res.status(406).send('Not Acceptable');
+  }
+});
+
+  });
+
+
+});
+
+/*************************************************/
+
+
+
+
 /*************** USERS ******************
 ***************************************/
 
@@ -154,7 +223,7 @@ app.post("/logs", function (req,res){
       res.render("404");
     }else{
       //find forecast from forecast name by log_spot_name
-      db.Forecast.find({spot_name: log.location, date: Date.parse(log.date).toISOString()}, function (err, forecast){
+      db.Forecast.find({spot_name: log.location, date:log.date}, function (err, forecast){
         if(err){
           console.log(err);
           res.render("404");
@@ -214,13 +283,23 @@ app.get("/apiCallTest", function (req,res){
 
     forecast.forEach(function(report){
 
-      var gmtDate = report.gmt;
+      // 
 
-      var ISODate = Date.parse(gmtDate).toISOString();  //Re-format date field to match log/calendar dates
+      //convert the gmt string into a date object
+      var time = report.gmt;
+
+      var total = time.split("-").slice(0,2).concat(time.split("-")[2].split(" ")).map(function(val){
+      return parseInt(val)});
+
+      var foreDate = new Date(total[0],total[1]-1,total[2],total[3])
+
+
+
+      // var ISODate = Date.parse(gmtDate).toISOString();  //Re-format date field to match log/calendar dates
 
       db.Forecast.create({
           spot_name:report.spot_name, // "South Ocean Beach"
-          date:ISODate,   // ex "2015-9-30 13"
+          date:foreDate,   // ex "2015-9-30 13"
           hour:report.hour,
           size_ft:report.size_ft,  //ex 1.6757142548640278
           shape:report.shape,  //"pf"
