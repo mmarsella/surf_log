@@ -1,3 +1,4 @@
+require('dotenv').load();  // for env variables
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -21,7 +22,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 //ALWAYS create the session BEFORE trying to using ANY MIDDLEWARE that involves req.session
 app.use(session({
   maxAge: 3600000,   //milliseconds  (360 seconds/6min) --> life of the cookie
-  secret: 'illnevertell', // communication
+  secret: process.env.COOKIE_SECRET, // communication
   name: "chocolate chip" // what we see in the resources tab/cookies --> browser
 }));
 

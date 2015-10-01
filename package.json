@@ -21,6 +21,7 @@
     "body-parser": "^1.14.1",
     "cookie-session": "^1.2.0",
     "datejs": "0.0.2",
+    "dotenv": "^1.2.0",
     "ejs": "^2.3.4",
     "express": "^4.13.3",
     "method-override": "^2.3.5",
