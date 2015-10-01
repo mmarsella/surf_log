@@ -1,4 +1,4 @@
-require('dotenv').load();  // for env variables
+    require('dotenv').load();  // for env variables
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -203,7 +203,7 @@ app.post("/logs", function (req,res){
 //need to make one more API call to the wind API
 app.get("/apiCallTest", function (req,res){
   console.log("^^^^^^^^^^*****^^^INSIDE THE API CALL!!!");
-  request.get("http://api.spitcast.com/api/spot/forecast/697/?dcat=week", function (err,response,body){
+  request.get("http://api.spitcast.com/api/spot/forecast/114/?dcat=week", function (err,response,body){
     var forecast = JSON.parse(body);
 
     forecast.forEach(function(report){

@@ -19,6 +19,9 @@
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
+    <!-- Chart.js -->
+  <script src="/bower_components/Chart.js/Chart.js"></script>
+
   <link rel="stylesheet" href="css/bootstrap.min.css">
     
 
@@ -29,7 +32,7 @@
 
 <script src='/bower_components/fullcalendar/dist/fullcalendar.js'></script>
 
-<!-- CALENDAR LOGIC -->
+<!-- JAVASCRIPT FILE FOR CALENDAR AND CHART LOGIC -->
   <script type="text/javascript" src="/js/calender.js"></script>
 
 <!-- **********************************************-->
@@ -82,7 +85,8 @@
         CURRENT REPORT
     </div>
     <div class="col-xs-6 text-center" id="stats">
-        <script src="Chart.js"></script>
+    <br>
+    <canvas id="myChart" width="200" height="200"></canvas>
     </div>
 </div>
 

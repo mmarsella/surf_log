@@ -14,12 +14,11 @@ var loginHelpers = function (req,res,next){
   // if there is nothing there...move on
     console.log("THERE IS NO SESSION!");
     res.locals.currentUser = undefined;
-    next();
+    next();  // specific to middleware... pushes the chain of command from the middleware to the client/server
   }
 
   else {
-    // if there is something there lets go to the DB and find the user
-    
+    // if there is something there lets go to the DB and find the user    
     db.User.findById(req.session.id,function(err,user){
       console.log("WE'RE ABOUT TO FIND OUR USER!", user);
       // make sure the user is available in all our views

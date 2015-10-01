@@ -49,7 +49,7 @@ var dateArray = $('.date').map(function() {return $(this).val(); });
 var log = new Array();
 for(var i = 0; i < locationArray.length; i++)
 {
-      var splitDate = dateArray[i].split(" ");
+    var splitDate = dateArray[i].split(" ");
     var d = parseInt(splitDate[2]);
     var m = parseInt(monthNumber(splitDate[1]));
     var y = parseInt(splitDate[3]);
@@ -65,6 +65,8 @@ for(var i = 0; i < locationArray.length; i++)
     log[i] = logSource;
 }
 /************************************************/
+
+
 
 function monthNumber(month){
     if(month === "Jan"){
@@ -117,11 +119,39 @@ function monthNumber(month){
         // },
         // ]
     });
-
 //Remove eventsources before pulling from DOM
 $('#calendar').fullCalendar('removeEventSource', log);
 //Add Events to cal
 $('#calendar').fullCalendar('addEventSource', log);
 $('#calendar').fullCalendar('renderEvents');
+
+
+/*********** CHART LOGIC  **********/
+
+// DUMMY DATA
+
+var data = [
+    {
+        value: 300,
+        color:"#F7464A",
+        highlight: "#FF5A5E",
+        label: "Red"
+    },
+    {
+        value: 50,
+        color: "#46BFBD",
+        highlight: "#5AD3D1",
+        label: "Green"
+    },
+    {
+        value: 100,
+        color: "#FDB45C",
+        highlight: "#FFC870",
+        label: "Yellow"
+    }];
+
+// Get the context of the canvas element we want to select
+var ctx = document.getElementById("myChart").getContext("2d");
+var myNewChart = new Chart(ctx).Doughnut(data);
        
 });
