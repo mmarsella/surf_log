@@ -162,7 +162,7 @@ app.post("/logs", function (req,res){
 
             log.size_ft = forecast[0].size_ft;
             log.shape = forecast[0].shape;
-            // log.tide = forecast[0].tide;
+            log.tide = forecast[0].tide;
 
 
             db.User.findById(req.session.id, function (err,user){
@@ -201,7 +201,7 @@ app.post("/logs", function (req,res){
 //need to make one more API call to the wind API
 app.get("/apiCallTest", function (req,res){
   console.log("^^^^^^^^^^*****^^^INSIDE THE API CALL!!!");
-  request.get("http://api.spitcast.com/api/spot/forecast/117/?dcat=week", function (err,response,body){
+  request.get("http://api.spitcast.com/api/spot/forecast/697/?dcat=week", function (err,response,body){
     var forecast = JSON.parse(body);
 
     forecast.forEach(function(report){
@@ -216,7 +216,7 @@ app.get("/apiCallTest", function (req,res){
           hour:report.hour,
           size_ft:report.size_ft,  //ex 1.6757142548640278
           shape:report.shape,  //"pf"
-          tide:report.tide   //"Poor-fair"
+          tide:report.shape_detail.tide   //"Poor-fair"
       });
       console.log("CREATED A FORECAST DOC FOR OB!",report);
     });
