@@ -51,7 +51,12 @@ $("#select").on("change", function(e){
             value: currentVal
         }
     }).done(function(serverResponse){
-        console.log(serverResponse)
+
+        //append html stuff with the response i get back.
+
+        //serverResponse is what i receive back form the call.
+
+        console.log(serverResponse);
     }).fail(function(err){
         console.log("SOMETHING WENT WRONG",err);
     });
@@ -118,7 +123,7 @@ for(var i = 0; i < locationArray.length; i++)
 
     var logSource = new Object();
     logSource.title = locationArray[i];
-    logSource.start = new Date(y,m,d+1,hour,min); //calendar always displays 5pm (17:00:00)
+    logSource.start = new Date(y,m,d,hour,min); //calendar always displays 5pm (17:00:00)
     log[i] = logSource;
 }
 /************************************************/

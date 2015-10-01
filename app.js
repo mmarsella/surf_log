@@ -228,12 +228,16 @@ app.post("/logs", function (req,res){
           console.log(err);
           res.render("404");
         }else{
+
+          console.log("THE LOG DATE WITH FORECAST",log.date);
             //Add forecast data into this LOG!!
             // returns an array of 1 forecast object
             log.size_ft = forecast[0].size_ft;
             log.shape = forecast[0].shape;
              //log.tide = forecast[0].tide;
             log.forecast_time = forecast[0].hour;
+            console.log("FORECASTE[0] hour", forecast[0].hour);
+            // console.log("FORECASTE[1] hour", forecast[1].hour);
 
 
             db.User.findById(req.session.id, function (err,user){
