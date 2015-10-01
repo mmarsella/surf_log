@@ -26,7 +26,15 @@
         </div>
              <div class="input-group">
           <span class="input-group-addon" id="basic-addon1">Location</span>
-          <input type="text" class="form-control" placeholder="What spot.." aria-describedby="basic-addon1"name="log[location]" id="location" required>
+          <select class="form-control" name="log[location]">
+              <option value="South Ocean Beach">South Ocean Beach</option>
+              <option value="North Ocean Beach">North Ocean Beach</option>
+              <option value="Kellys Cove">Kellys Cove</option>
+              <option value="Linda Mar">Linda Mar</option>
+              <option value="Montara">Montara</option>
+              <option value="Princeton Jetty">Princeton Jetty</option>
+          </select>
+         <!--  <input type="text" class="form-control" placeholder="What spot.." aria-describedby="basic-addon1"name="log[location]" id="location" required> -->
         </div>
         <br>
         <button class="btn-lg btn-success">POST</button>

@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/surf_log");
+mongoose.connect(process.env.MONGOLAB_URI || "mongodb://localhost/surf_log");
 mongoose.set('debug',true);
 
 module.exports.Log = require("./log");

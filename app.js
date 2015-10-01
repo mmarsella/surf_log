@@ -159,10 +159,11 @@ app.post("/logs", function (req,res){
           res.render("404");
         }else{
             //Add forecast data into this LOG!!
-
+            // returns an array of 1 forecast object
             log.size_ft = forecast[0].size_ft;
             log.shape = forecast[0].shape;
-            log.tide = forecast[0].tide;
+             //log.tide = forecast[0].tide;
+            log.forecast_time = forecast[0].hour;
 
 
             db.User.findById(req.session.id, function (err,user){
@@ -243,7 +244,7 @@ app.get('*', function(req,res){
   res.render('404');
 });
 
-// start the server
-app.listen(3000, function () {
+// start the server  --> If on heroku OR locally
+app.listen(process.env.PORT || 3000, function () {
   console.log("Starting a server on localhost:3000");
   });

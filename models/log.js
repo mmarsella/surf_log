@@ -16,6 +16,7 @@ var logSchema = new mongoose.Schema({
   //Added by the forecast data
     size_ft:Number,
     shape:String,
+    forecast_time:String,
     // tide:String  //need to add to forecast pull
   
 // Nest the forecast within the log
