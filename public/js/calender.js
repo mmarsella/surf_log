@@ -123,7 +123,7 @@ for(var i = 0; i < locationArray.length; i++)
 
     var logSource = new Object();
     logSource.title = locationArray[i];
-    logSource.start = new Date(y,m,d,hour,min); //calendar always displays 5pm (17:00:00)
+    logSource.start = new Date(y,m,d+1,hour,min); //calendar always displays 5pm (17:00:00)
     log[i] = logSource;
 }
 /************************************************/
