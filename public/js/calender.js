@@ -1,11 +1,11 @@
 $(document).ready(function() {
-    var date = new Date();
-    var d = date.getDate();
-    var m = date.getMonth();
-    var y = date.getFullYear();
-    console.log("THE DATE", d);
-    console.log("THE MONTH", m);
-    console.log("THE YEAR", y);
+    // var date = new Date();
+    // var d = date.getDate();
+    // var m = date.getMonth();
+    // var y = date.getFullYear();
+    // console.log("THE DATE", d);
+    // console.log("THE MONTH", m);
+    // console.log("THE YEAR", y);
     // page is now ready, initialize the calendar...
 
 /*********
@@ -49,39 +49,49 @@ var dateArray = $('.date').map(function() {return $(this).val(); });
 var log = new Array();
 for(var i = 0; i < locationArray.length; i++)
 {
+      var splitDate = dateArray[i].split(" ");
+    var d = parseInt(splitDate[2]);
+    var m = parseInt(monthNumber(splitDate[1]));
+    var y = parseInt(splitDate[3]);
+
+/**** CREATE HOUR AND MIN *********/
+    var time = timeArray[i].split(" ");
+    hour = parseInt(time[0].split(":")[0]);
+    min = parseInt(time[0].split(":")[1]);
+
     var logSource = new Object();
     logSource.title = locationArray[i];
-    logSource.start = new Date(dateArray[i]); //calendar always displays 5pm (17:00:00)
+    logSource.start = new Date(y,m,d+1,hour,min); //calendar always displays 5pm (17:00:00)
     log[i] = logSource;
 }
 /************************************************/
 
 function monthNumber(month){
     if(month === "Jan"){
-        return 1;
+        return 0;
     }else if(month === "Feb"){
-        return 2;
+        return 1;
     }else if(month === "Mar"){
-        return 3;
+        return 2;
     }else if(month === "Apr"){
-        return 4;
+        return 3;
     }else if(month === "May"){
-        return 5;
+        return 4;
     }else if(month === "Jun"){
-        return 6;
+        return 5;
     }else if(month === "Jul"){
-        return 7;
+        return 6;
     }else if(month === "Aug"){
-        return 8;
+        return 7;
     }else if(month === "Sep"){
-        return 9;
+        return 8;
     }else if(month === "Oct"){
-        return 10;
+        return 9;
     }else if(month === "Nov"){
-        return 11;
+        return 10;
     }else if(month === "Dec"){
-        return 12;
-    }else{return 1;}
+        return 11;
+    }else{return 0}
 }
 
 

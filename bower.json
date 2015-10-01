@@ -1,0 +1,22 @@
+{
+  "name": "surf_log",
+  "version": "0.0.0",
+  "homepage": "https://github.com/mmarsella/surf_log",
+  "authors": [
+    "Mark Marsella <mmarsella114@g.rwu.edu>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Chart.js": "~1.0.2"
+  }
+}

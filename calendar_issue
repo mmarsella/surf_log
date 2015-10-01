@@ -1,0 +1,26 @@
+    
+
+    /**********THIS WAS MY SOLUTION LAST NIGHT*******/
+
+    /*
+    I created a snippet called surf log.  What I am harc-coding 
+    into the date field IS NOT translating over into the DOM.
+    Tested in many dif ways, read the MDN docs and full calendar docs
+    NNED TO RESOLVE!!! CURRENT BUG:  all logs will reg as 5pm.
+    w/o the change, at least correct date.  */
+
+    var splitDate = dateArray[i].split(" ");
+    var d = parseInt(splitDate[2]);
+    var m = parseInt(monthNumber(splitDate[1]));
+    var y = parseInt(splitDate[3]);
+
+/**** CREATE HOUR AND MIN *********/
+    var time = timeArray[i].split(" ");
+    hour = parseInt(time[0].split(":")[0]);
+    min = parseInt(time[0].split(":")[1]);
+
+    var logSource = new Object();
+    logSource.title = locationArray[i];
+    logSource.start = new Date(2015,10,2,12,00,0); //calendar always displays 5pm (17:00:00)
+    log[i] = logSource;
+}
