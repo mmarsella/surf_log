@@ -263,6 +263,42 @@ var waveAVG = waveTotal / waveArray.length;
 
 waveAVG = parseFloat(waveAVG.toFixed(2));
 
+/************************************************/
+
+/******* LOCATION ********/
+var sOB = 0;
+var nOB = 0;
+var pacifica = 0;
+var montara = 0;
+var kelly = 0;
+var jetty = 0;
+
+function locationCounter(arr){
+for(var i = 0; i < arr.length; i++){
+        if(arr[i] == "South Ocean Beach"){
+            sOB++;
+        }
+        else if(arr[i] == "North Ocean Beach"){
+            nOB++;
+        }
+        else if(arr[i] == "Kellys Cove"){
+            kelly++;
+        }
+        else if(arr[i] == "Linda Mar"){
+            pacifica++;
+        }
+        else if(arr[i] == "Montara"){
+            montara++;
+        }
+        else if(arr[i] == "Princeton Jetty"){
+            jetty++;
+        }
+    }
+}
+
+locationCounter(locationArray);
+
+console.log("wave avg", waveAVG);
 
 
 /********* CHART DATA ********************/
@@ -312,6 +348,46 @@ var waves = [
     }
 ];
 
+var locations = [
+    {
+        value:sOB,
+        color:"green",
+        highlight: "#FF5A5E",
+        label: "South OB"
+    },
+    {
+        value:nOB,
+        color: "orange",
+        highlight: "#5AD3D1",
+        label: "North OB"
+    },
+    {
+        value:pacifica,
+        color: "red",
+        highlight: "#5AD3D1",
+        label: "Linda Mar"
+    },
+     {
+        value:montara,
+        color: "purple",
+        highlight: "#5AD3D1",
+        label: "Montara"
+    },
+      {
+        value:kelly,
+        color: "blue",
+        highlight: "#5AD3D1",
+        label: "KC"
+    },
+    {
+        value:jetty,
+        color: "yellow",
+        highlight: "#5AD3D1",
+        label: "Jetty"
+    },
+
+];
+
 console.log("Surf Hours",surfHours);
 console.log("Hours Surfed:",hoursSurfed);
 
@@ -324,6 +400,9 @@ var surfHourChart = new Chart(ctxM).Doughnut(surfHours);
 
 var height = document.getElementById("waveHeight").getContext("2d");
 var waveAvgChart = new Chart(height).Doughnut(waves);
+
+var loc = document.getElementById("locations").getContext("2d");
+var locationChart = new Chart(loc).Doughnut(locations);
 
 
        
