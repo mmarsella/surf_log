@@ -354,13 +354,13 @@ var locations = [
         value:sOB,
         color:"green",
         highlight: "#FF5A5E",
-        label: "South OB"
+        label: "S OB"
     },
     {
         value:nOB,
         color: "orange",
         highlight: "#5AD3D1",
-        label: "North OB"
+        label: "N OB"
     },
     {
         value:pacifica,
@@ -405,6 +405,5 @@ var waveAvgChart = new Chart(height).Doughnut(waves);
 var loc = document.getElementById("locations").getContext("2d");
 var locationChart = new Chart(loc).Doughnut(locations);
 
-
-       
+     
 });
