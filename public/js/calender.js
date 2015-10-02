@@ -219,24 +219,104 @@ var daysSurfed = locationArray.length;
 
 var hoursSurfed = durationArray.map(function (el){return parseInt(el);});
 
+var totalHours = 0;
+
+for(var i = 0; i < hoursSurfed.length; i++)
+{
+    totalHours += hoursSurfed[i];
+}
+
+
+// CALC CURRENT MONTH
+
+var calc = new Date();
+var n = calc.getMonth();
+
+
+// (31) --> 0,2,4,6,7,9,11
+// (30)  --> 3, 5, 8, 10
+// (28)  --> 1
+
+function surfMonth(n){
+    if(n === 0){
+        return [31,"January"];
+    }
+    else if(n === 2){
+        return [31, "March"];
+    }
+    else if(n === 4){
+        return [31,"May"];
+    }
+    else if(n === 6){
+        return [31,"July"];
+    }
+    else if(n === 7){
+        return [31,"August"];
+    }
+    else if(n === 9){
+        return [31,"October"];
+    }
+    else if(n === 11){
+        return [31,"December"];
+    }
+    else if(n === 3){
+        return [30, "April"];
+    }
+    else if(n === 5){
+        return [30,"June"];
+    }
+    else if(n === 8){
+        return [30,"September"];
+    }
+    else if(n === 10){
+        return [30,"November"];
+    }else{return 28;}
+}
+
+var dayMonth = surfMonth(n);
 
 var data = [
     {
-        value: 365,
+        value: dayMonth[0],
         color:"#F7464A",
         highlight: "#FF5A5E",
-        label: "Red"
+        label: "Days"
     },
     {
         value: daysSurfed,
         color: "#46BFBD",
         highlight: "#5AD3D1",
-        label: "Green"
+        label: "Surfed"
     }
     ];
+
+var surfHours = [
+    {
+        value:168,
+        color:"#F7464A",
+        highlight: "#FF5A5E",
+        label: "Red"
+    },
+    {
+        value:totalHours,
+        color: "#46BFBD",
+        highlight: "#5AD3D1",
+        label: "Green"
+    }
+];
+
+console.log("Surf Hours",surfHours);
+console.log("Hours Surfed:",hoursSurfed);
 
 // Get the context of the canvas element we want to select
 var ctx = document.getElementById("myChart").getContext("2d");
 var myNewChart = new Chart(ctx).Doughnut(data);
+
+var ctxM = document.getElementById("surfHours").getContext("2d");
+var surfHourChart = new Chart(ctxM).Doughnut(surfHours);
+
+
+
+
        
 });
