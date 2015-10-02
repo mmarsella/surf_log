@@ -279,7 +279,7 @@ app.post("/logs", function (req,res){
 //need to make one more API call to the wind API
 app.get("/apiCallTest", function (req,res){
   console.log("^^^^^^^^^^*****^^^INSIDE THE API CALL!!!");
-  request.get("http://api.spitcast.com/api/spot/forecast/117/?dcat=week", function (err,response,body){
+  request.get("http://api.spitcast.com/api/spot/forecast/123/?dcat=week", function (err,response,body){
     var forecast = JSON.parse(body);
 
     forecast.forEach(function(report){
