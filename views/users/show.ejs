@@ -64,25 +64,17 @@
     </div>
   </div>
 </nav>
-
-<div class="row top">
-    <div class="col-xs-2 side">
+    <!-- <div class="col-xs-2 side">
         <a href="/apiCallTest"><span class="glyphicon glyphicon-asterisk btn-info btn-sm"></span></a>
 
-    </div>
-    <div class="col-xs-8 text-center calendar">
-    <div id="calendar"></div>
+    </div> -->
 
-    </div>
-    <div class="col-xs-2 side">
-        <a href="/logs/new"><span class="glyphicon glyphicon-plus btn-success btn-sm"></span></a>
-    </div>
-</div>
+<div class="row top">
+    <div class="col-xs-8 text-center">
+    <div id="calendar" width="100" height="100">
+        
 
-<div class="row bottom">
-<br>
-    <div class="col-xs-6 text-center" id="
-    report">
+
     <h3>Current Forecast</h3>
       <form action="" method="GET">
         <div class="input-group">
@@ -97,16 +89,17 @@
           </select>
         </div>
      </form> 
-    <div class="forecast">
-        
+    <div class="forecast"></div>
 
     </div>
+
+    </div>
+    <div class="col-xs-1 side">
+        <a href="/logs/new"><span class="glyphicon glyphicon-plus btn-success btn-sm"></span></a>
     </div>
 
-    <!-- SHOW CURRENT REPORT -->
-    <div class="col-xs-6 text-center" id="stats">
-    <br>
-    <h5>Days Surfed/Month</h5>
+    <div class="col-xs-3">
+        <h5>Days Surfed/Month</h5>
     <canvas id="myChart" width="100" height="100"></canvas>
 
     <div>
@@ -124,9 +117,21 @@
     <h5>Locations</h5>
     <canvas id="locations" width="100" height="100"></canvas>    
     </div>
- 
+    </div>
+        
+
+
+
     </div>
 </div>
+
+<!-- <div class="row bottom"> -->
+<br>
+    <!-- <div class="col-xs-6 text-center" id="
+    report"> -->
+
+   <!--  </div> -->
+
 
 <!-- Hidden form to pass values into calendar.  Will
 grab values w/ jquery. -->

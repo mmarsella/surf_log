@@ -154,6 +154,7 @@ function monthNumber(month){
         editable:true,
         weekMode: 'liquid',
         url: '#',
+        height: 300,
         //iterate through all logs here and store it into hidden inputs
           // grab the hidden inputs in the dom w/ jquery
             // store that info into calendar events to populate calendar
@@ -323,13 +324,13 @@ var surfHours = [
         value:168,
         color:"#F7464A",
         highlight: "#FF5A5E",
-        label: "Hrs/week"
+        label: "Week"
     },
     {
         value:totalHours,
         color: "#46BFBD",
         highlight: "#5AD3D1",
-        label: "totalHours"
+        label: "Surfed"
     }
 ];
 
@@ -338,13 +339,13 @@ var waves = [
         value:waveAVG,
         color:"#F7464A",
         highlight: "#FF5A5E",
-        label: "Red"
+        label: "You"
     },
     {
         value:10,
         color: "#46BFBD",
         highlight: "#5AD3D1",
-        label: "Green"
+        label: "Big"
     }
 ];
 

@@ -24,3 +24,6 @@ TO DO
 3)  Make back-log compatible.  Write some logic so that if the forecast isn't stored in my db, a log is created with null values for the forecast.
 4)  DELETE A LOG :  In the show page, create a delete button.
 
+HOW TO MONGO EXPORT THIS DB:
+
+➜  surf_log git:(master) ✗ mongoexport --db surf_log --collection forecasts --host:127.0.0.1:27107 --out forecasts.json 
