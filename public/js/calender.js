@@ -27,12 +27,6 @@ FOR WED
 ******************************/
 
 
-
-
-// 3)  Take that data, make a db query
-// 4)  Respond with json (res.format)
-// 5)  Put response data on page
-
 /***** CURRENT FORECAST ********/
 
 // 1) Onchange, grab value (use jQuery)
@@ -84,34 +78,6 @@ $("#select").on("change", function(e){
 
 /****************************************/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /******* GRAB HIDDEN INPUT VALUES FROM DOM  **********/
 
 //All hidden time input values  --> May not need this
@@ -125,6 +91,9 @@ var dateArray = $('.date').map(function() {return $(this).val(); });
 
 // ' '
 var durationArray = $('.duration').map(function() {return $(this).val(); });
+
+// Size of all the waves surfed
+var waveArray = $('.size_ft').map(function() {return $(this).val(); });
 
 /*******************************************************/
 
@@ -213,9 +182,10 @@ $('#calendar').fullCalendar('renderEvents');
 
 //DAYS SURFED 
 
-var daysSurfed = locationArray.length;
 
-//HOURS SURFED / Week
+var daysSurfed = locationArray.length;  // NEED to calc the amt of days surfed PER MONTH!! 
+
+/********* HOURS SURFED / Week   ******************/
 
 var hoursSurfed = durationArray.map(function (el){return parseInt(el);});
 
@@ -274,6 +244,22 @@ function surfMonth(n){
 }
 
 var dayMonth = surfMonth(n);
+
+/*********************************/
+
+
+/********* AVERAGE WAVE HEIGHT  **************/
+
+
+
+
+
+
+
+
+
+
+/********* CHART DATA ********************/
 
 var data = [
     {

@@ -1,0 +1,26 @@
+TO DO
+
+------ CURRENT FORECAST -------
+
+1) Accurate Forecast: Make search by hr, date and location.
+2) Image in background of dif spot
+3) Style
+
+
+
+-- STATISTICS ---
+
+1) Days/month needs to find the amt of days within that specific month.  As of now, it only considers ALL days surfed and compares that against the current month's amt of days.
+
+2)  Amt of locations surfed
+
+3)  
+
+
+-- CALENDAR --
+
+1)  Create SHOW page for each log.
+2)  Ensure accuracy of forecast with log.
+3)  Make back-log compatible.  Write some logic so that if the forecast isn't stored in my db, a log is created with null values for the forecast.
+4)  DELETE A LOG :  In the show page, create a delete button.
+
