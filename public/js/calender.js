@@ -52,6 +52,24 @@ $("#select").on("change", function(e){
         }
     }).done(function(serverResponse){
 
+        $('.forecast').empty();
+        $('.forecast').append("<h4 id='spot'>" + "Spot Name: " + "</h4>");
+        $('#spot').append("<span>"+serverResponse.spot_name+"</span>"); 
+
+        $('.forecast').append("<h4 id='date'>" + "Date: " + "</h4>");
+        $('#date').append("<span>"+serverResponse.date+"</span>"); 
+
+        $('.forecast').append("<h4 id='hour'>" + "Hour: " + "</h4>");
+        $('#hour').append("<span>"+serverResponse.hour+"</span>"); 
+
+        $('.forecast').append("<h4 id='waveSize'>" + "Wave Size: " + "</h4>");
+        $('#waveSize').append("<span>"+serverResponse.size_ft+"</span>"); 
+
+        $('.forecast').append("<h4 id='wind'>" + "Wind: " + "</h4>");
+        $('#wind').append("<span>"+serverResponse.shape_detail.wind+"</span>"); 
+
+
+
         //append html stuff with the response i get back.
 
         //serverResponse is what i receive back form the call.
@@ -64,7 +82,7 @@ $("#select").on("change", function(e){
     console.log("This changed!");
 });
 
-
+/****************************************/
 
 
 

@@ -107,16 +107,9 @@ function spotId(spot){
 app.get("/forecast", function(req,res){
 
   var spot = spotId(req.query.value);
-
- // date = Date.today();
- // console.log("THE DATE:",date);
- // date = date.toISOString();
- //  console.log("THIS IS FROM AJAX!", date);
-
   // make a db call with req.query.value
   // respond with some json
   // CHECK OUT RES.FORMAT
-
     console.log("THE VALUE: ",req.query.value);
     console.log("The SPOT ID ",spot);
 
@@ -128,7 +121,7 @@ app.get("/forecast", function(req,res){
   res.format({
 
   'application/json': function(){
-    res.send(currentForecast[11]);
+    res.send(currentForecast[11]);  //sending back 11am forecast
   },
 
   'default': function() {
@@ -138,12 +131,9 @@ app.get("/forecast", function(req,res){
 });
 
   });
-
-
 });
 
 /*************************************************/
-
 
 
 
@@ -216,6 +206,11 @@ app.get("/users/:user_id/posts/:id/edit", function (req,res){
 
 //CREATE
 app.post("/logs", function (req,res){
+  console.log("BEFORE CODEZ", req.body.log.date);
+  var jsDate = req.body.log.date.split("-");
+  var jsTime = req.body.log.time.substring(0,2);
+  req.body.log.date = new Date(jsDate[0], jsDate[1]-1,jsDate[2],jsTime);
+  console.log("AFTER CODEZ", req.body.log.date) ;
   db.Log.create(req.body.log, function (err, log){
     console.log("*********THE LOG: ",log);
     if(err){
@@ -228,7 +223,8 @@ app.post("/logs", function (req,res){
           console.log(err);
           res.render("404");
         }else{
-
+          console.log("THESE ARE FORECASTS WE FOUND", forecast);
+          
           console.log("THE LOG DATE WITH FORECAST",log.date);
             //Add forecast data into this LOG!!
             // returns an array of 1 forecast object
