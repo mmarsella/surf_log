@@ -202,7 +202,6 @@ for(var i = 0; i < hoursSurfed.length; i++)
 var calc = new Date();
 var n = calc.getMonth();
 
-
 // (31) --> 0,2,4,6,7,9,11
 // (30)  --> 3, 5, 8, 10
 // (28)  --> 1
@@ -251,11 +250,18 @@ var dayMonth = surfMonth(n);
 /********* AVERAGE WAVE HEIGHT  **************/
 
 
+var waveTotal = 0;
 
+for(var i = 0; i < waveArray.length; i++)
+{
+    waveTotal += parseFloat(waveArray[i]);
+}
 
+waveTotal = parseFloat(waveTotal.toFixed(2));
 
+var waveAVG = waveTotal / waveArray.length;
 
-
+waveAVG = parseFloat(waveAVG.toFixed(2));
 
 
 
@@ -281,10 +287,25 @@ var surfHours = [
         value:168,
         color:"#F7464A",
         highlight: "#FF5A5E",
-        label: "Red"
+        label: "Hrs/week"
     },
     {
         value:totalHours,
+        color: "#46BFBD",
+        highlight: "#5AD3D1",
+        label: "totalHours"
+    }
+];
+
+var waves = [
+    {
+        value:waveAVG,
+        color:"#F7464A",
+        highlight: "#FF5A5E",
+        label: "Red"
+    },
+    {
+        value:10,
         color: "#46BFBD",
         highlight: "#5AD3D1",
         label: "Green"
@@ -301,7 +322,8 @@ var myNewChart = new Chart(ctx).Doughnut(data);
 var ctxM = document.getElementById("surfHours").getContext("2d");
 var surfHourChart = new Chart(ctxM).Doughnut(surfHours);
 
-
+var height = document.getElementById("waveHeight").getContext("2d");
+var waveAvgChart = new Chart(height).Doughnut(waves);
 
 
        
