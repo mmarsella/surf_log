@@ -123,6 +123,9 @@ var locationArray = $('.location').map(function() {return $(this).val(); });
 //All hidden time input values  --> cal date fields can receive ISO date
 var dateArray = $('.date').map(function() {return $(this).val(); });
 
+// ' '
+var durationArray = $('.duration').map(function() {return $(this).val(); });
+
 /*******************************************************/
 
 /***** MAKING A NEW CALENDAR EVENTS   ***********/
@@ -141,12 +144,10 @@ for(var i = 0; i < locationArray.length; i++)
 
     var logSource = new Object();
     logSource.title = locationArray[i];
-    logSource.start = new Date(y,m,d+1,hour,min); //calendar always displays 5pm (17:00:00)
+    logSource.start = new Date(y,m,d,hour,min); //calendar always displays 5pm (17:00:00)
     log[i] = logSource;
 }
 /************************************************/
-
-
 
 function monthNumber(month){
     if(month === "Jan"){
@@ -175,8 +176,6 @@ function monthNumber(month){
         return 11;
     }else{return 0}
 }
-
-
 
     $('#calendar').fullCalendar({
         // put your options and callbacks here
@@ -208,27 +207,33 @@ $('#calendar').fullCalendar('renderEvents');
 
 /*********** CHART LOGIC  **********/
 
+
+
 // DUMMY DATA
+
+//DAYS SURFED 
+
+var daysSurfed = locationArray.length;
+
+//HOURS SURFED / Week
+
+var hoursSurfed = durationArray.map(function (el){return parseInt(el);});
+
 
 var data = [
     {
-        value: 300,
+        value: 365,
         color:"#F7464A",
         highlight: "#FF5A5E",
         label: "Red"
     },
     {
-        value: 50,
+        value: daysSurfed,
         color: "#46BFBD",
         highlight: "#5AD3D1",
         label: "Green"
-    },
-    {
-        value: 100,
-        color: "#FDB45C",
-        highlight: "#FFC870",
-        label: "Yellow"
-    }];
+    }
+    ];
 
 // Get the context of the canvas element we want to select
 var ctx = document.getElementById("myChart").getContext("2d");

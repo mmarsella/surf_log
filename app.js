@@ -218,13 +218,16 @@ app.post("/logs", function (req,res){
       res.render("404");
     }else{
       //find forecast from forecast name by log_spot_name
-      db.Forecast.find({spot_name: log.location, date:log.date}, function (err, forecast){
+      db.Forecast.find({spot_name: log.location, date:log.date}, function (err, forecast){  // try to search by hour
         if(err){
           console.log(err);
           res.render("404");
         }else{
           console.log("THESE ARE FORECASTS WE FOUND", forecast);
-          
+
+          console.log("**********  LOG TIME",log.time);
+          console.log("**********  FORECAST TIME",forecast[0].hour);
+
           console.log("THE LOG DATE WITH FORECAST",log.date);
             //Add forecast data into this LOG!!
             // returns an array of 1 forecast object
@@ -234,7 +237,6 @@ app.post("/logs", function (req,res){
             log.forecast_time = forecast[0].hour;
             console.log("FORECASTE[0] hour", forecast[0].hour);
             // console.log("FORECASTE[1] hour", forecast[1].hour);
-
 
             db.User.findById(req.session.id, function (err,user){
               console.log("****USER: ",user);
@@ -248,7 +250,6 @@ app.post("/logs", function (req,res){
               res.redirect("/users/" + req.session.id);
             });
         }
-        // res.send(forecast);
       });
     }
   });
@@ -278,22 +279,18 @@ app.post("/logs", function (req,res){
 //need to make one more API call to the wind API
 app.get("/apiCallTest", function (req,res){
   console.log("^^^^^^^^^^*****^^^INSIDE THE API CALL!!!");
-  request.get("http://api.spitcast.com/api/spot/forecast/123/?dcat=week", function (err,response,body){
+  request.get("http://api.spitcast.com/api/spot/forecast/117/?dcat=week", function (err,response,body){
     var forecast = JSON.parse(body);
 
     forecast.forEach(function(report){
-
-      // 
 
       //convert the gmt string into a date object
       var time = report.gmt;
 
       var total = time.split("-").slice(0,2).concat(time.split("-")[2].split(" ")).map(function(val){
-      return parseInt(val)});
+      return parseInt(val);});
 
-      var foreDate = new Date(total[0],total[1]-1,total[2],total[3])
-
-
+      var foreDate = new Date(total[0],total[1]-1,total[2],total[3]);
 
       // var ISODate = Date.parse(gmtDate).toISOString();  //Re-format date field to match log/calendar dates
 

@@ -103,7 +103,8 @@
     <!-- SHOW CURRENT REPORT -->
     <div class="col-xs-6 text-center" id="stats">
     <br>
-    <canvas id="myChart" width="200" height="200"></canvas>
+    <h5>Days Surfed/Year</h5>
+    <canvas id="myChart" width="100" height="100"></canvas>
     </div>
 </div>
 
@@ -114,6 +115,7 @@ grab values w/ jquery. -->
      <input type="hidden" name="log[date]" value="<%=log.date%>" class="date">
     <input type="hidden" name="log[time]" value="<%=log.time%>" class="time"> 
     <input type="hidden" name="log[location]" value="<%=log.location%>" class="location">
+     <input type="hidden" name="log[duration]" value="<%=log.duration%>" class="duration">
     <%})%>  
 </form>
 
