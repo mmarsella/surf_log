@@ -30,7 +30,7 @@ app.use(loginMiddleware);  // calling the loginhelper on EVERY REQUEST!
 
 /***** ROOT  ******/
 app.get("/", function (req,res){
-  res.redirect("/login");
+  res.render("users/index");
 });
 
 /*********** LOGIN AND SIGN UP ***************
@@ -66,7 +66,7 @@ app.post("/login", function (req,res){
         req.login(user);
         res.redirect("/users/" + user._id);
       }else{
-        console.log(user)
+        console.log(user);
         console.log(err);
         res.redirect("/users");
       }
@@ -138,12 +138,10 @@ app.get("/forecast", function(req,res){
 /*************** USERS ******************
 ***************************************/
 
-
 // INDEX
 app.get("/users", function (req,res){
   res.render("users/index");
 });
-
 
 //SHOW  --> USER HOMEPAGE
 app.get("/users/:id", function (req,res){

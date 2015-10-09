@@ -1,5 +1,17 @@
 TO DO
 
+-----GENERAL UI ----------
+
+1)  Create welcome page to default to when:
+    \___ User logs out
+    \___ Entering the site
+
+2)  Surf Log icon
+    \__ if(user) --> go to user show page
+    \__if(!user) --> go to index/welcome screen
+
+
+
 -------LOGIC-------------
 
 1) Scrap the 10 day cache forecast.
