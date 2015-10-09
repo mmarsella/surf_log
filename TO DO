@@ -1,5 +1,18 @@
 TO DO
 
+-------LOGIC-------------
+
+1) Scrap the 10 day cache forecast.
+2) Make an API call for a log.
+   \___ Limits user to only be able to log the SAME DAY
+
+3) If user makes a log on a later date.
+   \___ They must provide forecast data.
+
+4) If no forecast data is present
+   \____ Do not send to the DOM for charts
+
+
 ------ CURRENT FORECAST -------
 
 1) Accurate Forecast: Make search by hr, date and location.
@@ -7,21 +20,15 @@ TO DO
 3) Style
 
 
-
 -- STATISTICS ---
 
 1) Days/month needs to find the amt of days within that specific month.  As of now, it only considers ALL days surfed and compares that against the current month's amt of days.
 
-2)  Amt of locations surfed
-
-3)  
-
-
+ 
 -- CALENDAR --
 
 1)  Create SHOW page for each log.
 2)  Ensure accuracy of forecast with log.
-3)  Make back-log compatible.  Write some logic so that if the forecast isn't stored in my db, a log is created with null values for the forecast.
 4)  DELETE A LOG :  In the show page, create a delete button.
 
 HOW TO MONGO EXPORT THIS DB:

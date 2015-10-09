@@ -16,26 +16,37 @@
   <link rel="stylesheet" href="../public/show.css">
 </head>
 <body class="container">
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/">SURF LOG</a>
-    </div>
-  <% if(currentUser) {%>
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/">
-  Welcome, <%= currentUser.name%>
-    </div>
-<% }%></a>
-    <div>
-      <ul class="nav navbar-nav navbar-right">
-    <% if(!currentUser) {%>
-        <li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li> 
-    <% } else { %>
-         <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-      <% } %>
-      </ul>
-    </div>
-  </div>
-</nav>
+    <div class="container">
+      <!-- Static navbar -->
+      <nav class="navbar navbar-default navbar-static-top">
+        <div class="container-fluid">
+          <div class="navbar-header navl">
+            <a class="navbar-brand brandx" href="/">Surf Log</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navl">
+              <% if(currentUser) { %>
+              <li><a href="/users/show"><strong><%= currentUser.name%></strong></a></li>
+              <% } %>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <% if(!currentUser) { %>
+              <form action="/login" method="POST" class="form-inline">
+                <div class="form-group">
+                  <label class="sr-only" for="exampleInputEmail3">Name</label>
+                  <input type="text" class="form-control classBtn" name="user[name]" id="exampleInputEmail3" placeholder="First Name" required>
+                </div>
+                <div class="form-group">
+                  <label class="sr-only" for="exampleInputPassword3">Password</label>
+                  <input type="password" class="form-control classBtn" name="user[password]" id="exampleInputPassword3" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn btn-default pull-right loginBtn">Login</button>
+              </form>
+              <a href="/signup">Not a user? Sign up</a>
+              <% } else { %>
+                <a href="/logout"><button type="submit" class="btn btn-default pull-right loginBtn classBtn">Logout</button></a>
+              <% } %>
+            </ul>
+          </div>
+        </div>
+      </nav>

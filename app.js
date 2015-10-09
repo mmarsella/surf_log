@@ -29,7 +29,6 @@ app.use(session({
 app.use(loginMiddleware);  // calling the loginhelper on EVERY REQUEST!
 
 /***** ROOT  ******/
-
 app.get("/", function (req,res){
   res.redirect("/login");
 });
@@ -67,6 +66,8 @@ app.post("/login", function (req,res){
         req.login(user);
         res.redirect("/users/" + user._id);
       }else{
+        console.log(user)
+        console.log(err);
         res.redirect("/users");
       }
     });
@@ -105,7 +106,6 @@ function spotId(spot){
 
 
 app.get("/forecast", function(req,res){
-
   var spot = spotId(req.query.value);
   // make a db call with req.query.value
   // respond with some json
@@ -114,14 +114,12 @@ app.get("/forecast", function(req,res){
     console.log("The SPOT ID ",spot);
 
     request.get("http://api.spitcast.com/api/spot/forecast/"+ spot + "/?dcat=week", function (err,response,body){
-
     var currentForecast = JSON.parse(body);
-
     console.log("The report for " + req.query.value + ":" + currentForecast[0].hour);
   res.format({
 
   'application/json': function(){
-    res.send(currentForecast[11]);  //sending back 11am forecast
+    res.send(currentForecast[12]);  //sending back 11am forecast
   },
 
   'default': function() {
@@ -146,9 +144,6 @@ app.get("/users", function (req,res){
   res.render("users/index");
 });
 
-//NEW
-// app.get("/users/new", function (req,res){
-// });
 
 //SHOW  --> USER HOMEPAGE
 app.get("/users/:id", function (req,res){

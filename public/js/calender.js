@@ -15,7 +15,6 @@ FOR WED
 
 3) Create weekly cron call for API PUll
 
-
 5)  Create some user statistics:
     - Days surfed
     - Hours in the water
@@ -45,7 +44,6 @@ $("#select").on("change", function(e){
             value: currentVal
         }
     }).done(function(serverResponse){
-
         $('.forecast').empty();
         $('.forecast').append("<h4 id='spot'>" + "Spot Name: " + "</h4>");
         $('#spot').append("<span>"+serverResponse.spot_name+"</span>"); 
@@ -61,23 +59,16 @@ $("#select").on("change", function(e){
 
         $('.forecast').append("<h4 id='wind'>" + "Wind: " + "</h4>");
         $('#wind').append("<span>"+serverResponse.shape_detail.wind+"</span>"); 
-
-
-
+        
         //append html stuff with the response i get back.
-
         //serverResponse is what i receive back form the call.
-
-        console.log(serverResponse);
     }).fail(function(err){
         console.log("SOMETHING WENT WRONG",err);
     });
     // $('.form-control').val();
     console.log("This changed!");
 });
-
 /****************************************/
-
 /******* GRAB HIDDEN INPUT VALUES FROM DOM  **********/
 
 //All hidden time input values  --> May not need this
@@ -155,18 +146,6 @@ function monthNumber(month){
         weekMode: 'liquid',
         url: '#',
         height: 300,
-        //iterate through all logs here and store it into hidden inputs
-          // grab the hidden inputs in the dom w/ jquery
-            // store that info into calendar events to populate calendar
-        // events: [ 
-        // {
-        //     title: "Ocean Beach",
-        //     start: new Date(y, m, 1, 9, 00),
-        //     url: "https://www.google.com/?gws_rd=ssl",
-        //     editable:true,
-        //     allDay:false
-        // },
-        // ]
     });
 //Remove eventsources before pulling from DOM
 $('#calendar').fullCalendar('removeEventSource', log);
@@ -174,16 +153,10 @@ $('#calendar').fullCalendar('removeEventSource', log);
 $('#calendar').fullCalendar('addEventSource', log);
 $('#calendar').fullCalendar('renderEvents');
 
-
 /*********** CHART LOGIC  **********/
-
-
-
-// DUMMY DATA
+/***********************************/
 
 //DAYS SURFED 
-
-
 var daysSurfed = locationArray.length;  // NEED to calc the amt of days surfed PER MONTH!! 
 
 /********* HOURS SURFED / Week   ******************/
@@ -197,9 +170,7 @@ for(var i = 0; i < hoursSurfed.length; i++)
     totalHours += hoursSurfed[i];
 }
 
-
 // CALC CURRENT MONTH
-
 var calc = new Date();
 var n = calc.getMonth();
 
@@ -245,11 +216,8 @@ function surfMonth(n){
 
 var dayMonth = surfMonth(n);
 
+/******* AVERAGE WAVE HEIGHT *****/
 /*********************************/
-
-
-/********* AVERAGE WAVE HEIGHT  **************/
-
 
 var waveTotal = 0;
 
@@ -259,9 +227,7 @@ for(var i = 0; i < waveArray.length; i++)
 }
 
 waveTotal = parseFloat(waveTotal.toFixed(2));
-
 var waveAVG = waveTotal / waveArray.length;
-
 waveAVG = parseFloat(waveAVG.toFixed(2));
 
 /************************************************/
@@ -303,6 +269,7 @@ console.log("wave avg", waveAVG);
 
 
 /********* CHART DATA ********************/
+/****************************************/
 
 var data = [
     {
@@ -392,6 +359,9 @@ var locations = [
 console.log("Surf Hours",surfHours);
 console.log("Hours Surfed:",hoursSurfed);
 
+/******* CHARTS TO DRAW **************************/
+/*************************************************/
+
 // Get the context of the canvas element we want to select
 var ctx = document.getElementById("myChart").getContext("2d");
 var myNewChart = new Chart(ctx).Doughnut(data);
@@ -404,6 +374,5 @@ var waveAvgChart = new Chart(height).Doughnut(waves);
 
 var loc = document.getElementById("locations").getContext("2d");
 var locationChart = new Chart(loc).Doughnut(locations);
-
-     
+    
 });
