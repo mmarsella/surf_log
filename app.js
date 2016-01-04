@@ -78,9 +78,7 @@ app.get("/logout", function (req,res){
   res.redirect("/");
 });
 
-
 /************* CURRENT FORECAST  *****************/
-
 // Grab DATA for:
 //    - South Ocean Beach: 117 -
 //    - North Ocean Beach: 114 -
@@ -103,7 +101,6 @@ function spotId(spot){
     return 123;
   }else{}
 }
-
 
 app.get("/forecast", function(req,res){
   var spot = spotId(req.query.value);
@@ -132,9 +129,6 @@ app.get("/forecast", function(req,res){
 });
 
 /*************************************************/
-
-
-
 /*************** USERS ******************
 ***************************************/
 
@@ -156,33 +150,9 @@ app.get("/users/:id", function (req,res){
   });
 });
 
-//EDIT
-app.get("/users/:id/edit", function (req,res){
-});
-
-// //CREATE
-// app.post("/users", function (req,res){
-// });
-
-// //UPDATE
-// app.put("/users/:id", function (req,res){
-// });
-
-// //DESTROY
-// app.delete("/users/:id", function (req,res){
-// });
-
 
 /*************** LOGS ******************
 ***************************************/
-
-//ROOT
-// app.get("/", function (req,res){
-// });
-
-//INDEX
-// app.get("/users/:user_id/posts", function (req,res){
-// });
 
 //NEW
 app.get("/logs/new", routeMiddleware.ensureLoggedIn, function (req,res){
@@ -199,7 +169,9 @@ app.get("/users/:user_id/posts/:id/edit", function (req,res){
 
 //CREATE
 app.post("/logs", function (req,res){
-  console.log("BEFORE CODEZ", req.body.log.date);
+  var spot = spotId(req.body.log.location);
+  // console.log("\n\n\n\n\nSPOT!!!!",spot);
+  // console.log("BEFORE CODEZ", req.body.log.date);
   var jsDate = req.body.log.date.split("-");
   var jsTime = req.body.log.time.substring(0,2);
   req.body.log.date = new Date(jsDate[0], jsDate[1]-1,jsDate[2],jsTime);
@@ -210,40 +182,27 @@ app.post("/logs", function (req,res){
       console.log(err);
       res.render("404");
     }else{
-      //find forecast from forecast name by log_spot_name
-      db.Forecast.find({spot_name: log.location, date:log.date}, function (err, forecast){  // try to search by hour
-        if(err){
-          console.log(err);
-          res.render("404");
-        }else{
-          console.log("THESE ARE FORECASTS WE FOUND", forecast);
+      //grab the forecast of that spot --> present day ONLY.... for now
+      request.get("http://api.spitcast.com/api/spot/forecast/"+ spot + "/?dcat=week", function (err,response,body){
+          var currentForecast = JSON.parse(body);
+          var hour = currentForecast[0].hour;
+          console.log(currentForecast[0]);
+          log.size_ft = currentForecast[0].size_ft;
+          log.shape = currentForecast[0].shape;
+        db.User.findById(req.session.id, function (err,user){
+          // console.log("****USER: ",user);
+          // console.log("***WE ARE MAKING THE LOG");
+          user.logs.push(log);  // store log for user
+          log.user = user._id;  // log is associated w/ this user
+          log.save();
+          user.save();
+          // console.log("LOG IS SAVED");
+          // console.log("^^^^^^ THE DATE ^^^^", log.date);
+          res.redirect("/users/" + req.session.id);
+        });
 
-          console.log("**********  LOG TIME",log.time);
-          console.log("**********  FORECAST TIME",forecast[0].hour);
-
-          console.log("THE LOG DATE WITH FORECAST",log.date);
-            //Add forecast data into this LOG!!
-            // returns an array of 1 forecast object
-            log.size_ft = forecast[0].size_ft;
-            log.shape = forecast[0].shape;
-             //log.tide = forecast[0].tide;
-            log.forecast_time = forecast[0].hour;
-            console.log("FORECASTE[0] hour", forecast[0].hour);
-            // console.log("FORECASTE[1] hour", forecast[1].hour);
-
-            db.User.findById(req.session.id, function (err,user){
-              console.log("****USER: ",user);
-              console.log("***WE ARE MAKING THE LOG");
-              user.logs.push(log);  // store log for user
-              log.user = user._id;  // log is associated w/ this user
-              log.save();
-              user.save();
-              console.log("LOG IS SAVED");
-              console.log("^^^^^^ THE DATE ^^^^", log.date);
-              res.redirect("/users/" + req.session.id);
-            });
-        }
-      });
+        
+      }); //end request
     }
   });
 });
@@ -252,14 +211,11 @@ app.post("/logs", function (req,res){
 // create forecast documents for a full week in the future
 // 
 
-
 /******** Parse GMT date format to ISOString  ********/
 
 //Date.parse(date).toISOString()
 
-//db.logs.find({date:ISODate(d.toISOString())})
 /*******************************************************/
-
 
 // 4) Grab DATA for:
 //    - South Ocean Beach: 117 -
@@ -272,21 +228,17 @@ app.post("/logs", function (req,res){
 //need to make one more API call to the wind API
 app.get("/apiCallTest", function (req,res){
   console.log("^^^^^^^^^^*****^^^INSIDE THE API CALL!!!");
-  request.get("http://api.spitcast.com/api/spot/forecast/123/?dcat=week", function (err,response,body){
+  request.get("http://api.spitcast.com/api/spot/forecast/117/?dcat=week", function (err,response,body){
     var forecast = JSON.parse(body);
-
     forecast.forEach(function(report){
-
       //convert the gmt string into a date object
       var time = report.gmt;
-
       var total = time.split("-").slice(0,2).concat(time.split("-")[2].split(" ")).map(function(val){
       return parseInt(val);});
 
       var foreDate = new Date(total[0],total[1]-1,total[2],total[3]);
 
       // var ISODate = Date.parse(gmtDate).toISOString();  //Re-format date field to match log/calendar dates
-
       db.Forecast.create({
           spot_name:report.spot_name, // "South Ocean Beach"
           date:foreDate,   // ex "2015-9-30 13"
@@ -305,13 +257,6 @@ app.get("/apiCallTest", function (req,res){
   });
 });
 
-//UPDATE
-app.put("/users/:user_id/posts/:id", function (req,res){
-});
-
-//DESTROY
-app.delete("/users/:user_id/posts/:id", function (req,res){
-});
 
 /**** 404 CATCH-ALL ******
 *************************/

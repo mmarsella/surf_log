@@ -2,11 +2,15 @@ TO DO
 
 -----GENERAL UI ----------
 
-1)  Create welcome page to default to when:
+1)  Convert API request to MSW API.  
+    \__Create dynamic API-call per forecast.
+    \__Add MSW features to surf_log show page - Charts - Swell maps
+
+2)  Create welcome page to default to when:
     \___ User logs out
     \___ Entering the site
 
-2)  Surf Log icon
+3)  Surf Log icon
     \__ if(user) --> go to user show page
     \__if(!user) --> go to index/welcome screen
 
@@ -46,3 +50,11 @@ TO DO
 HOW TO MONGO EXPORT THIS DB:
 
 ➜  surf_log git:(master) ✗ mongoexport --db surf_log --collection forecasts --host:127.0.0.1:27107 --out forecasts.json 
+
+
+
+TO DEPLOY
+
+
+
+
