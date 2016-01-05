@@ -11,6 +11,8 @@ var loginMiddleware = require("./middleware/loginHelper"); //refers to name of f
 var routeMiddleware = require("./middleware/routeHelper");
 var date = require("datejs");
 
+app.use('/bower_components', express.static(__dirname + '/../bower_components'));
+
 app.set('view engine', 'ejs');
 app.use(methodOverride('_method'));
 //server-side logger.  Logs requests to the terminal
@@ -69,7 +71,7 @@ app.post("/login", function (req,res){
         res.redirect("/users");
       }
     });
-});
+}); 
 
 app.get("/logout", function (req,res){
   req.logout();
