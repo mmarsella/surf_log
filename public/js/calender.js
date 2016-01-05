@@ -67,7 +67,7 @@ $("#select").on("change", function(e){
         console.log("SOMETHING WENT WRONG",err);
     });
     // $('.form-control').val();
-    console.log("This changed!");
+
 });
 /****************************************/
 /******* GRAB HIDDEN INPUT VALUES FROM DOM  **********/
@@ -77,6 +77,7 @@ var timeArray = $('.time').map(function() {return $(this).val(); });
 
 //All hidden location input values
 var locationArray = $('.location').map(function() {return $(this).val(); });
+// console.log("locationARR:",locationArray);
 
 //All hidden time input values  --> cal date fields can receive ISO date
 var dateArray = $('.date').map(function() {return $(this).val(); });
@@ -86,6 +87,11 @@ var durationArray = $('.duration').map(function() {return $(this).val(); });
 
 // Size of all the waves surfed
 var waveArray = $('.size_ft').map(function() {return $(this).val(); });
+
+// ID's of all logs
+var idArray = $('.id').map(function() {return $(this).val(); });
+console.log("idARR:",idArray);
+
 
 /*******************************************************/
 
@@ -104,6 +110,7 @@ for(var i = 0; i < locationArray.length; i++)
     min = parseInt(time[0].split(":")[1]);
 
     var logSource = new Object();
+    logSource.id = idArray[i];
     logSource.title = locationArray[i];
     logSource.start = new Date(y,m,d,hour,min); //calendar always displays 5pm (17:00:00)
     log[i] = logSource;
@@ -138,16 +145,53 @@ function monthNumber(month){
     }else{return 0}
 }
 
-    $('#calendar').fullCalendar({
-        // put your options and callbacks here
-        dayClick: function (){
-            alert("DAY IS CLICKED!");  // use this call-back to render the indiv show page.
-        },
-        editable:true,
-        weekMode: 'liquid',
-        url: '#',
-        height: 300,
-    });
+    // $('#calendar').fullCalendar({
+    //     // put your options and callbacks here
+    //     dayClick: function (){
+    //         // alert("DAY IS CLICKED!");  // use this call-back to render the indiv show page.
+    //     },
+    //     editable:true,
+    //     weekMode: 'liquid',
+    //     url: '#',
+    //     height: 300,
+    // });
+
+// event click
+
+$('#calendar').fullCalendar({
+    eventClick: function(calEvent, jsEvent, view) {
+        // console.log(calEvent);
+
+        $.ajax({
+        url: "/logs/" + calEvent.id,
+        dataType: "json",
+        method: "GET",
+        // data is what we are passing to the server.  // will be req.query.value on the back end
+        data: {
+            value: calEvent.id
+        }
+        }).done(function(serverResponse){
+            $('#myModal .modal-body').empty();
+            console.log("SERVER SAYS:",serverResponse);
+            $('#myModal .modal-body').append("<h3 id='logSpot' >" + serverResponse.location +  "</h3>");
+            $('#myModal .modal-body').append('<p  style="font-style: italic">"'  + serverResponse.description +  '"</p>');
+            $('#myModal .modal-body').append('<h5 id="logDuration"> Duration: </h5>'); 
+            $('#myModal .modal-body #logDuration').append('<span>'  + serverResponse.duration +  ' minutes </span>');
+            $('#myModal').modal('toggle');
+
+        });//end of .done
+
+
+        // alert('ID: ' + calEvent.id)
+        
+
+        // change the border color just for fun
+        $(this).css('border-color', 'red');
+
+    }
+});
+
+
 //Remove eventsources before pulling from DOM
 $('#calendar').fullCalendar('removeEventSource', log);
 //Add Events to cal

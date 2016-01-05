@@ -106,7 +106,6 @@ app.get("/forecast", function(req,res){
     var spot = spotId(req.query.value);
     // make a db call with req.query.value
     // respond with some json
-    // CHECK OUT RES.FORMAT
     //grab the correct index
     var d = Date().split(" ")[4].split(":")[0];
     request.get("http://api.spitcast.com/api/spot/forecast/"+ spot + "/?dcat=week", function (err,response,body){
@@ -156,7 +155,23 @@ app.get("/logs/new", routeMiddleware.ensureLoggedIn, function (req,res){
 
 //SHOW
 app.get("/logs/:id", function (req,res){
+  db.Log.findById(req.params.id, function (err,log){
+    if(err){
+      console.log(err);
+    }else{
+      res.format({
+      'application/json': function(){
+        res.send(log);  //sending back 11am forecast
+      },
+      'default': function() {
+        // log the request and respond with 406
+        res.status(406).send('Not Acceptable');
+      }
+      });
+    }
+  })
 });
+
 
 //EDIT
 app.get("/users/:user_id/posts/:id/edit", function (req,res){
