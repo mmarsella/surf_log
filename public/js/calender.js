@@ -54,8 +54,9 @@ $("#select").on("change", function(e){
         $('.forecast').append("<h4 id='hour'>" + "Hour: " + "</h4>");
         $('#hour').append("<span>"+serverResponse.hour+"</span>"); 
 
+        var size_ft = serverResponse.size_ft.toFixed(2);
         $('.forecast').append("<h4 id='waveSize'>" + "Wave Size: " + "</h4>");
-        $('#waveSize').append("<span>"+serverResponse.size_ft+"</span>"); 
+        $('#waveSize').append("<span>"+size_ft+" ft </span>"); 
 
         $('.forecast').append("<h4 id='wind'>" + "Wind: " + "</h4>");
         $('#wind').append("<span>"+serverResponse.shape_detail.wind+"</span>"); 
@@ -306,13 +307,13 @@ var waves = [
         value:waveAVG,
         color:"#F7464A",
         highlight: "#FF5A5E",
-        label: "You"
+        label: "Your avg"
     },
     {
-        value:10,
+        value:15,
         color: "#46BFBD",
         highlight: "#5AD3D1",
-        label: "Big"
+        label: "Dbl Overhead"
     }
 ];
 

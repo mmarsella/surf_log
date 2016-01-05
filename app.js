@@ -61,7 +61,7 @@ app.get("/login", function (req,res){
 app.post("/login", function (req,res){
   db.User.authenticate(req.body.user,
     function (err,user){
-      console.log("THE USER: " + user);
+      // console.log("THE USER: " + user);
       if(!err && user !== null){
         req.login(user);
         res.redirect("/users/" + user._id);
@@ -141,7 +141,7 @@ app.get("/users", function (req,res){
 app.get("/users/:id", function (req,res){
   db.User.findById(req.params.id, function (err, user){
     db.Log.find({user:req.session.id}, function (err, logs){
-      console.log("****** ALL THE LOGS:", logs);
+      // console.log("****** ALL THE LOGS:", logs);
       res.render("users/show",{user:user, logs:logs});  // send in logs
     });
     //db.Log.find(user._id)
@@ -171,37 +171,46 @@ app.get("/users/:user_id/posts/:id/edit", function (req,res){
 app.post("/logs", function (req,res){
   var spot = spotId(req.body.log.location);
   // console.log("\n\n\n\n\nSPOT!!!!",spot);
+ 
   // console.log("BEFORE CODEZ", req.body.log.date);
-  var jsDate = req.body.log.date.split("-");
+  // var jsDate = req.body.log.date.split("-");
+  console.log("REQ Time!!!!!******\n\n\n\n", req.body.log.time);
   var jsTime = req.body.log.time.substring(0,2);
-  req.body.log.date = new Date(jsDate[0], jsDate[1]-1,jsDate[2],jsTime);
-  console.log("AFTER CODEZ", req.body.log.date) ;
+
+  // req.body.log.date = new Date(jsDate[0], jsDate[1]-1,jsDate[2],jsTime);
+  // console.log("AFTER CODEZ", req.body.log.date);
+
+  //grab the specific hour
+  // var timeArr = req.body.log.time.split(":")[0];
+  //specHour is the index of the forecast array I will need to access
+
+  // var specHour = parseInt(timeArr[4].split(":")[0]);
+  var specHour = parseInt(req.body.log.time.split(":")[0]);
+
+  console.log(specHour);
   db.Log.create(req.body.log, function (err, log){
-    console.log("*********THE LOG: ",log);
+    // console.log("*********THE LOG: ",log);
     if(err){
       console.log(err);
       res.render("404");
     }else{
       //grab the forecast of that spot --> present day ONLY.... for now
       request.get("http://api.spitcast.com/api/spot/forecast/"+ spot + "/?dcat=week", function (err,response,body){
+          log.date = new Date();
           var currentForecast = JSON.parse(body);
-          var hour = currentForecast[0].hour;
-          console.log(currentForecast[0]);
-          log.size_ft = currentForecast[0].size_ft;
-          log.shape = currentForecast[0].shape;
+          var hour = currentForecast[specHour].hour;
+          console.log("FORECAST!!\n\n\n\n\n",currentForecast[specHour]);
+          log.size_ft = currentForecast[specHour].size_ft;
+          log.size_ft = log.size_ft.toFixed();  // round to 2 decimal places
+          log.shape = currentForecast[specHour].shape;
         db.User.findById(req.session.id, function (err,user){
-          // console.log("****USER: ",user);
-          // console.log("***WE ARE MAKING THE LOG");
           user.logs.push(log);  // store log for user
           log.user = user._id;  // log is associated w/ this user
           log.save();
           user.save();
-          // console.log("LOG IS SAVED");
-          // console.log("^^^^^^ THE DATE ^^^^", log.date);
+        
           res.redirect("/users/" + req.session.id);
         });
-
-        
       }); //end request
     }
   });
