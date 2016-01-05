@@ -1,35 +1,8 @@
 $(document).ready(function() {
-    // var date = new Date();
-    // var d = date.getDate();
-    // var m = date.getMonth();
-    // var y = date.getFullYear();
-    // console.log("THE DATE", d);
-    // console.log("THE MONTH", m);
-    // console.log("THE YEAR", y);
-    // page is now ready, initialize the calendar...
-
-/*********
-FOR WED
-1)  Sync forecast time w/ log entry time
-  -- may need to be written in creation of log/find of forecast for log
-
-3) Create weekly cron call for API PUll
-
-5)  Create some user statistics:
-    - Days surfed
-    - Hours in the water
-    - Avg wave height
-
-6)  Chart.js to create user statistics based on the "more verbose" logs after the forecasts are added to the logs.
-7)  Create show-page on-click of a calendar entry
-8)  Re-design homepage
-******************************/
-
 
 /***** CURRENT FORECAST ********/
 
 // 1) Onchange, grab value (use jQuery)
-
 var currentVal = $('.form-control').val();  
 
 // 2)  Send that value to the server (AJAX)
@@ -66,7 +39,6 @@ $("#select").on("change", function(e){
     }).fail(function(err){
         console.log("SOMETHING WENT WRONG",err);
     });
-    // $('.form-control').val();
 
 });
 /****************************************/
@@ -90,7 +62,6 @@ var waveArray = $('.size_ft').map(function() {return $(this).val(); });
 
 // ID's of all logs
 var idArray = $('.id').map(function() {return $(this).val(); });
-console.log("idARR:",idArray);
 
 
 /*******************************************************/
@@ -145,25 +116,8 @@ function monthNumber(month){
     }else{return 0}
 }
 
-    // $('#calendar').fullCalendar({
-    //     // put your options and callbacks here
-    //     dayClick: function (){
-    //         // alert("DAY IS CLICKED!");  // use this call-back to render the indiv show page.
-    //     },
-    //     editable:true,
-    //     weekMode: 'liquid',
-    //     url: '#',
-    //     height: 300,
-    // });
-
-// event click
-
 $('#calendar').fullCalendar({
     eventClick: function(calEvent, jsEvent, view) {
-        console.log("jsEvent",jsEvent);
-        console.log("view",view);
-        console.log("calEvent",calEvent);
-        // console.log("Time!", calEvent._start._d.toString().split(" ").splice(0,5).join(" "));
         var time = calEvent._start._d.toString().split(" ").splice(0,5).join(" ");
         $.ajax({
         url: "/logs/" + calEvent.id,
@@ -175,7 +129,6 @@ $('#calendar').fullCalendar({
         }
         }).done(function(serverResponse){
             $('#myModal .modal-body').empty();
-            console.log("SERVER SAYS:",serverResponse);
             $('#myModal .modal-body').append("<h3 id='logSpot' >" + serverResponse.location + "</h3>");
             $('#myModal .modal-body #logSpot').append("<span id='logTime'>" + "  (" + time + ")" + "</span>");
 
@@ -186,23 +139,14 @@ $('#calendar').fullCalendar({
             $('#myModal .modal-body #logSize').append('<span>'  + serverResponse.size_ft +  ' ft</span>');
             $('#myModal .modal-body').append('<h5 id="logShape"> Shape: </h5>'); 
             $('#myModal .modal-body #logShape').append('<span>'  + serverResponse.shape + '</span>');
-            $('#myModal .modal-body').append('<h5 id="logShape"> Shape: </h5>'); 
 
-
-
-
-
+            //toggle modal when clicked
             $('#myModal').modal('toggle');
 
         });//end of .done
 
-
-        // alert('ID: ' + calEvent.id)
-        
-
         // change the border color just for fun
         $(this).css('border-color', 'red');
-
     }
 });
 
@@ -325,8 +269,6 @@ for(var i = 0; i < arr.length; i++){
 
 locationCounter(locationArray);
 
-console.log("wave avg", waveAVG);
-
 
 /********* CHART DATA ********************/
 /****************************************/
@@ -416,8 +358,6 @@ var locations = [
 
 ];
 
-console.log("Surf Hours",surfHours);
-console.log("Hours Surfed:",hoursSurfed);
 
 /******* CHARTS TO DRAW **************************/
 /*************************************************/
