@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 //ALWAYS create the session BEFORE trying to using ANY MIDDLEWARE that involves req.session
 app.use(session({
-  maxAge: 3600000,   //milliseconds  (360 seconds/6min) --> life of the cookie
+  maxAge: 10600000,   //milliseconds  (360 seconds/6min) --> life of the cookie
   secret: process.env.COOKIE_SECRET, // communication
   name: "chocolate chip" // what we see in the resources tab/cookies --> browser
 }));
@@ -66,8 +66,6 @@ app.post("/login", function (req,res){
         req.login(user);
         res.redirect("/users/" + user._id);
       }else{
-        console.log(user);
-        console.log(err);
         res.redirect("/users");
       }
     });
@@ -103,31 +101,27 @@ function spotId(spot){
 }
 
 app.get("/forecast", function(req,res){
-  var spot = spotId(req.query.value);
-  // make a db call with req.query.value
-  // respond with some json
-  // CHECK OUT RES.FORMAT
-    console.log("THE VALUE: ",req.query.value);
-    console.log("The SPOT ID ",spot);
-
+    var spot = spotId(req.query.value);
+    // make a db call with req.query.value
+    // respond with some json
+    // CHECK OUT RES.FORMAT
+   
+    //grab the correct index
+    var d = Date().split(" ")[4].split(":")[0];
     request.get("http://api.spitcast.com/api/spot/forecast/"+ spot + "/?dcat=week", function (err,response,body){
     var currentForecast = JSON.parse(body);
-    console.log("The report for " + req.query.value + ":" + currentForecast[0].hour);
-  res.format({
-
-  'application/json': function(){
-    res.send(currentForecast[12]);  //sending back 11am forecast
-  },
-
-  'default': function() {
-    // log the request and respond with 406
-    res.status(406).send('Not Acceptable');
-  }
-});
-
+    console.log("The report for " + req.query.value + ":" + currentForecast[d].hour);
+    res.format({
+      'application/json': function(){
+        res.send(currentForecast[d]);  //sending back 11am forecast
+      },
+      'default': function() {
+        // log the request and respond with 406
+        res.status(406).send('Not Acceptable');
+      }
+    });
   });
 });
-
 /*************************************************/
 /*************** USERS ******************
 ***************************************/
