@@ -105,7 +105,6 @@ app.get("/forecast", function(req,res){
     // make a db call with req.query.value
     // respond with some json
     // CHECK OUT RES.FORMAT
-   
     //grab the correct index
     var d = Date().split(" ")[4].split(":")[0];
     request.get("http://api.spitcast.com/api/spot/forecast/"+ spot + "/?dcat=week", function (err,response,body){
@@ -202,7 +201,6 @@ app.post("/logs", function (req,res){
           log.user = user._id;  // log is associated w/ this user
           log.save();
           user.save();
-        
           res.redirect("/users/" + req.session.id);
         });
       }); //end request
@@ -210,17 +208,7 @@ app.post("/logs", function (req,res){
   });
 });
 
-// Make an API call
-// create forecast documents for a full week in the future
-// 
-
-/******** Parse GMT date format to ISOString  ********/
-
-//Date.parse(date).toISOString()
-
 /*******************************************************/
-
-// 4) Grab DATA for:
 //    - South Ocean Beach: 117 -
 //    - North Ocean Beach: 114 -
 //    - Kelly's Cove: 697 - 
@@ -230,7 +218,6 @@ app.post("/logs", function (req,res){
 
 //need to make one more API call to the wind API
 app.get("/apiCallTest", function (req,res){
-  console.log("^^^^^^^^^^*****^^^INSIDE THE API CALL!!!");
   request.get("http://api.spitcast.com/api/spot/forecast/117/?dcat=week", function (err,response,body){
     var forecast = JSON.parse(body);
     forecast.forEach(function(report){
@@ -238,9 +225,7 @@ app.get("/apiCallTest", function (req,res){
       var time = report.gmt;
       var total = time.split("-").slice(0,2).concat(time.split("-")[2].split(" ")).map(function(val){
       return parseInt(val);});
-
       var foreDate = new Date(total[0],total[1]-1,total[2],total[3]);
-
       // var ISODate = Date.parse(gmtDate).toISOString();  //Re-format date field to match log/calendar dates
       db.Forecast.create({
           spot_name:report.spot_name, // "South Ocean Beach"
@@ -250,20 +235,13 @@ app.get("/apiCallTest", function (req,res){
           shape:report.shape,  //"pf"
           tide:report.shape_detail.tide   //"Poor-fair"
       });
-      console.log("CREATED A FORECAST DOC FOR OB!",report);
     });
-    console.log("*************************************");
-    console.log("FORECAST LENGTH",forecast.length);
-    // console.log(forecast);
-        console.log("*************************************");
     res.redirect("/users/" + req.session.id);
   });
 });
 
-
 /**** 404 CATCH-ALL ******
 *************************/
-
 app.get('*', function(req,res){
   res.render('404');
 });
