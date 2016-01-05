@@ -46,7 +46,7 @@ app.post("/signup", function (req,res){
     console.log(user);
     if(user){
       req.login(user);
-      res.redirect("/"); //redirect user to homepage
+      res.redirect("/users/" + user._id); //redirect user to homepage
     }else{
       console.log(err);
       res.redirect("/signup");
