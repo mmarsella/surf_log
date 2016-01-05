@@ -160,8 +160,11 @@ function monthNumber(month){
 
 $('#calendar').fullCalendar({
     eventClick: function(calEvent, jsEvent, view) {
-        // console.log(calEvent);
-
+        console.log("jsEvent",jsEvent);
+        console.log("view",view);
+        console.log("calEvent",calEvent);
+        // console.log("Time!", calEvent._start._d.toString().split(" ").splice(0,5).join(" "));
+        var time = calEvent._start._d.toString().split(" ").splice(0,5).join(" ");
         $.ajax({
         url: "/logs/" + calEvent.id,
         dataType: "json",
@@ -173,10 +176,22 @@ $('#calendar').fullCalendar({
         }).done(function(serverResponse){
             $('#myModal .modal-body').empty();
             console.log("SERVER SAYS:",serverResponse);
-            $('#myModal .modal-body').append("<h3 id='logSpot' >" + serverResponse.location +  "</h3>");
+            $('#myModal .modal-body').append("<h3 id='logSpot' >" + serverResponse.location + "</h3>");
+            $('#myModal .modal-body #logSpot').append("<span id='logTime'>" + "  (" + time + ")" + "</span>");
+
             $('#myModal .modal-body').append('<p  style="font-style: italic">"'  + serverResponse.description +  '"</p>');
             $('#myModal .modal-body').append('<h5 id="logDuration"> Duration: </h5>'); 
             $('#myModal .modal-body #logDuration').append('<span>'  + serverResponse.duration +  ' minutes </span>');
+            $('#myModal .modal-body').append('<h5 id="logSize"> Size: </h5>'); 
+            $('#myModal .modal-body #logSize').append('<span>'  + serverResponse.size_ft +  ' ft</span>');
+            $('#myModal .modal-body').append('<h5 id="logShape"> Shape: </h5>'); 
+            $('#myModal .modal-body #logShape').append('<span>'  + serverResponse.shape + '</span>');
+            $('#myModal .modal-body').append('<h5 id="logShape"> Shape: </h5>'); 
+
+
+
+
+
             $('#myModal').modal('toggle');
 
         });//end of .done

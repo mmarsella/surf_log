@@ -161,6 +161,7 @@ app.get("/logs/:id", function (req,res){
     }else{
       res.format({
       'application/json': function(){
+        console.log("LOOOOG", log);
         res.send(log);  //sending back 11am forecast
       },
       'default': function() {

@@ -14,8 +14,12 @@
 
 }
 
-h4 > span{
+#logTime{
   font-size: 12px;
+}
+
+h4 > span{
+  font-size: 18px;
   color: blue;
 
 }
