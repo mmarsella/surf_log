@@ -3,7 +3,7 @@ About Surf Log
 
 Surf Log is a web application that allows bay area surfers to associate accurate surf forecasts into their own personal surf log.  Users are able to see graphs of the conditions they surf, average wave heights and so much more!  
 
-Play around with it here:  https://surf-log.herokuapp.com/
+Play around with it here:  https://surf-log.herokuapp.com
 
 ![alt tag](https://cloud.githubusercontent.com/assets/12140339/12106156/3935343e-b311-11e5-924f-f7eaf728f625.png)
 
