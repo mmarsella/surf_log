@@ -236,28 +236,28 @@ app.post("/logs", function (req,res){
 //    - Princeton Jetty: 123
 
 //need to make one more API call to the wind API
-app.get("/apiCallTest", function (req,res){
-  request.get("http://api.spitcast.com/api/spot/forecast/117/?dcat=week", function (err,response,body){
-    var forecast = JSON.parse(body);
-    forecast.forEach(function(report){
-      //convert the gmt string into a date object
-      var time = report.gmt;
-      var total = time.split("-").slice(0,2).concat(time.split("-")[2].split(" ")).map(function(val){
-      return parseInt(val);});
-      var foreDate = new Date(total[0],total[1]-1,total[2],total[3]);
-      // var ISODate = Date.parse(gmtDate).toISOString();  //Re-format date field to match log/calendar dates
-      db.Forecast.create({
-          spot_name:report.spot_name, // "South Ocean Beach"
-          date:foreDate,   // ex "2015-9-30 13"
-          hour:report.hour,
-          size_ft:report.size_ft,  //ex 1.6757142548640278
-          shape:report.shape,  //"pf"
-          tide:report.shape_detail.tide   //"Poor-fair"
-      });
-    });
-    res.redirect("/users/" + req.session.id);
-  });
-});
+// app.get("/apiCallTest", function (req,res){
+//   request.get("http://api.spitcast.com/api/spot/forecast/117/?dcat=week", function (err,response,body){
+//     var forecast = JSON.parse(body);
+//     forecast.forEach(function(report){
+//       //convert the gmt string into a date object
+//       var time = report.gmt;
+//       var total = time.split("-").slice(0,2).concat(time.split("-")[2].split(" ")).map(function(val){
+//       return parseInt(val);});
+//       var foreDate = new Date(total[0],total[1]-1,total[2],total[3]);
+//       // var ISODate = Date.parse(gmtDate).toISOString();  //Re-format date field to match log/calendar dates
+//       db.Forecast.create({
+//           spot_name:report.spot_name, // "South Ocean Beach"
+//           date:foreDate,   // ex "2015-9-30 13"
+//           hour:report.hour,
+//           size_ft:report.size_ft,  //ex 1.6757142548640278
+//           shape:report.shape,  //"pf"
+//           tide:report.shape_detail.tide   //"Poor-fair"
+//       });
+//     });
+//     res.redirect("/users/" + req.session.id);
+//   });
+// });
 
 /**** 404 CATCH-ALL ******
 *************************/

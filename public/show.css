@@ -36,6 +36,22 @@ h4 > span{
   margin-bottom: 100px;
 }
 
+.navbar{
+  opacity: .70;
+}
+.page-scroll{
+  margin-right: 41px;
+  opacity: 1;
+}
+
+.logout{
+
+  margin-top: -5px;
+  padding: 3px 6px;
+  
+}
+
+
 #stats{
  /* background-color: orange;
     padding-top: 50px;
