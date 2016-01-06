@@ -129,8 +129,9 @@ $('#calendar').fullCalendar({
         }
         }).done(function(serverResponse){
             $('#myModal .modal-body').empty();
-            $('#myModal .modal-body').append("<h3 id='logSpot' >" + serverResponse.location + "</h3>");
-            $('#myModal .modal-body #logSpot').append("<span id='logTime'>" + "  (" + time + ")" + "</span>");
+            $('#myModal .modal-header').empty();
+            $('#myModal .modal-header').append("<h3 id='logSpot' >" + serverResponse.location + "</h3>");
+            $('#myModal .modal-header #logSpot').append("<span id='logTime'>" + "  (" + time + ")" + "</span>");
 
             $('#myModal .modal-body').append('<p  style="font-style: italic">"'  + serverResponse.description +  '"</p>');
             $('#myModal .modal-body').append('<h5 id="logDuration"> Duration: </h5>'); 
