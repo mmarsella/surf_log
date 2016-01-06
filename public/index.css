@@ -1,3 +1,17 @@
 body{
   background-image: url(../imgs/ocean-wallpapers-marvelous-hd-desktop-wallpapers-of-ocean-free-download.jpg);
 }
+
+.form-inline{
+
+  margin-top: 7px;
+}
+
+.intro {
+  margin-top: 150px;
+  color: white;
+}
+
+.signup{
+  color: white;
+}

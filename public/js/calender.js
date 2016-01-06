@@ -117,6 +117,8 @@ function monthNumber(month){
 }
 
 $('#calendar').fullCalendar({
+    height: 300,
+    width: 200,
     eventClick: function(calEvent, jsEvent, view) {
         var time = calEvent._start._d.toString().split(" ").splice(0,5).join(" ");
         $.ajax({

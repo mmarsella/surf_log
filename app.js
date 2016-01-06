@@ -17,6 +17,7 @@ app.set('view engine', 'ejs');
 app.use(methodOverride('_method'));
 //server-side logger.  Logs requests to the terminal
 app.use(morgan('tiny'));
+//tells express where my assets are --> what to do w/ routes that gets public assets
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended:true}));
 
