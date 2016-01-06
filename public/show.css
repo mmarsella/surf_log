@@ -11,7 +11,10 @@
  /* background-color: magenta;
     padding-top: 50px;
     padding-bottom: 50px;*/
+}
 
+body{
+    font-family: 'Indie Flower', cursive;
 }
 
 .modal-header{
@@ -39,6 +42,9 @@ h4 > span{
 .navbar{
   opacity: .70;
 }
+
+
+
 .page-scroll{
   margin-right: 41px;
   opacity: 1;
