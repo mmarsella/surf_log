@@ -176,7 +176,7 @@ app.get("/logs/:id", function (req,res){
 
 
 //EDIT
-app.get("/users/:user_id/posts/:id/edit", function (req,res){
+app.get("/logs/:id/edit", function (req,res){
 });
 
 //DELETE

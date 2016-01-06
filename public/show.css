@@ -1,22 +1,13 @@
-/*.calendar{
-  padding: 100px 50px 125px 50px;
-  margin-bottom: 100px;
-}*/
 .side{
-/*  background-color: green;*/
   padding: 20px;
-}
-
-#report{
- /* background-color: magenta;
-    padding-top: 50px;
-    padding-bottom: 50px;*/
 }
 
 body{
     font-family: 'Indie Flower', cursive;
-    /*background-image: url(http://orig07.deviantart.net/4dc8/f/2013/189/0/e/soft_blue_background_by_omfkg-d6c2qeb.jpg); */
   }
+.fa .fa-github{
+      font-family: 'Indie Flower', cursive;
+}
 
 .modal-header{
   background-color: rgb(0, 115, 153);
@@ -33,7 +24,6 @@ body{
 h4 > span{
   font-size: 18px;
   color: blue;
-
 }
 
 .bottom{
@@ -53,18 +43,13 @@ h4 > span{
 
   margin-top: -5px;
   padding: 3px 6px;
-  
 }
 
-
-#stats{
- /* background-color: orange;
-    padding-top: 50px;
-    padding-bottom: 50px;
-*/
+#about:hover{
+  cursor: pointer;
 }
 
-.calendarDiv{
- /* width: 90%;
-  height: 120%;*/
+#about{
+    float: right;
+    margin-top: 16px;
 }

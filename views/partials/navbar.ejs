@@ -2,6 +2,9 @@
           <div class="container">
               <!-- Brand and toggle get grouped for better mobile display -->
               <div class="navbar-header page-scroll">
+
+                   <div data-toggle="modal" data-target="#aboutModal" id="about">About</div>
+
                   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                       <span class="sr-only">Toggle navigation</span>
                       <span class="icon-bar"></span>
@@ -15,10 +18,16 @@
                       <%}%>
               </div>
 
+                <!-- Trigger the modal with a button -->
+<!--   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
+
+
+
               <!-- Collect the nav links, forms, and other content for toggling -->
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav navbar-right">
                       <li class="page-scroll">
+
                       <!-- Login Form -->
                         <% if(!currentUser) { %>
                         <form action="/login" method="POST" class="form-inline">
@@ -43,3 +52,42 @@
           </div>
           <!-- /.container-fluid -->
       </nav>
+
+        <!-- Modal -->
+  <div class="modal fade" id="aboutModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          <h2>About Surf Log</h2>
+          <p>Surf Log is my first Node.js web application that I've built.  Additional technologies used to build Surf Log are:  Express.js, MongoDB/Mongoose, Chart.js, FullCalendar.js, jQuery,Bootstrap and the SpitCast API.</p>
+
+
+
+          <h2>How to use Surf Log</h2>
+          <p>1) Go Surf</p>
+          <p>2) Log your surf session on the SAME DAY you surfed! *</p>
+          <p>3) Check out logs of previous surf sessions, and be amazed by the cool information Surf Log gives you about your surf stats!</p>
+
+          <p>* Due to the limitations of the SpitCast API, forecasts are only accessible for the current day.  In order for Surf Log to keep track of forecast data associated with a specific spot, users must log their sessions the SAME DAY they surfed.</p>
+
+          <h2>Contact</h2>
+          <p>Comments? Questions? Love/Hate Surf Log?</p>
+          <h3>Mark Marsella</h3>
+          <a href="mailto:mmarsella114@gmail.com"  class="fa fa-envelope-o">   mmarsella114@gmail.com</a>
+          <br>
+          <a href="https://github.com/mmarsella/surf_log" class="fa fa-github">  github.com/mmarsella/surf_log</a>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
