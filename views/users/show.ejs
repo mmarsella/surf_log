@@ -26,7 +26,6 @@
   <script type="text/javascript" src="/js/calender.js"></script>
 
 <!-- STYLE -->
-
 <link rel="stylesheet" href="/show.css">
 
 </head>
@@ -35,8 +34,10 @@
   <div class="container-fluid">
     <div class="navbar-header">
     <% if(currentUser){ %>
-      <a class="navbar-brand" href="/">SURF LOG</a>
-      <%}else %>
+      <a class="navbar-brand" href="/users/<%=currentUser._id%>">SURF LOG</a>
+      <%}else {%>
+        <a class="navbar-brand" href="/">SURF LOG</a>
+      <%}%>
     </div>
   <% if(currentUser) {%>
     <div class="navbar-header">
@@ -56,10 +57,6 @@
     </div>
   </div>
 </nav>
-<!--     <div class="col-xs-2 side">
-        <a href="/apiCallTest"><span class="glyphicon glyphicon-asterisk btn-info btn-sm"></span></a>
-
-    </div> -->
 
   <div class="container">
   <!-- Trigger the modal with a button -->
@@ -75,14 +72,11 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title"></h4>
         </div>
-        <div class="modal-body">
-          <p>Some text in the modal.</p>
-        </div>
+        <div class="modal-body"></div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
-      
     </div>
   </div>
   
@@ -137,18 +131,11 @@
     </div>
         
 
-
-
     </div>
 </div>
 
-<!-- <div class="row bottom"> -->
+
 <br>
-    <!-- <div class="col-xs-6 text-center" id="
-    report"> -->
-
-   <!--  </div> -->
-
 
 <!-- Hidden form to pass values into calendar.  Will
 grab values w/ jquery. -->
@@ -162,7 +149,4 @@ grab values w/ jquery. -->
      <input type="hidden" name="log[id]" value="<%=log._id%>" class="id">
     <%})%>  
 </form>
-
-
-
 <% include ../partials/footer %>

@@ -1,9 +1,69 @@
-<% include ../partials/header %>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Surf Log</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/index.css">
+  </head>
+  <body class="container">
+      <div class="container">
+        <!-- Static navbar -->
+      <!-- Navigation -->
+      <nav class="navbar navbar-default navbar-static-top">
+          <div class="container">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header page-scroll">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="/">Surf Log</a>
+              </div>
+
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav navbar-right">
+                      <li class="page-scroll">
+                      <!-- Login Form -->
+                        <% if(!currentUser) { %>
+                        <form action="/login" method="POST" class="form-inline">
+                          <div class="form-group">
+                            <label class="sr-only" for="exampleInputEmail3">Name</label>
+                            <input type="text" class="form-control classBtn" name="user[name]" id="exampleInputEmail3" placeholder="First Name" required>
+                          </div>
+                          <div class="form-group">
+                            <label class="sr-only" for="exampleInputPassword3">Password</label>
+                            <input type="password" class="form-control classBtn" name="user[password]" id="exampleInputPassword3" placeholder="Password" required>
+                          </div>
+                          <button type="submit" class="btn btn-default loginBtn">Login</button>
+                        </form>
+                        <% } else { %>
+                          <a href="/logout"><button type="submit" class="btn btn-default pull-right loginBtn classBtn">Logout</button></a>
+                        <% } %>
+                        <!-- End login Form -->
+                      </li>
+                  </ul>
+              </div>
+              <!-- /.navbar-collapse -->
+          </div>
+          <!-- /.container-fluid -->
+      </nav>
 <div class="row">
     <div class="col-xs-3 filler"></div>
     <div class="col-xs-6">
       <form action="/signup" class="text-center" method="POST">
-        <h1>SIGN UP!</h1>
+        <h1 class="signup">SIGN UP!</h1>
           <div class="input-group">
           <span class="input-group-addon" id="basic-addon1">Name</span>
           <input type="text" class="form-control" placeholder="Name.." aria-describedby="basic-addon1"name="user[name]" id="name" required>
