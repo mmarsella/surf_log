@@ -3,15 +3,22 @@ body{
 }
 
 .form-inline{
-
   margin-top: 7px;
 }
 
 .intro {
   margin-top: 150px;
-  color: white;
+  /*color: white;*/
 }
 
 .signup{
   color: white;
+}
+
+.navbar{
+  opacity: .70;
+}
+.page-scroll{
+  margin-right: 41px;
+  opacity: 1;
 }
