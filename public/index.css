@@ -1,5 +1,6 @@
 body{
   background-image: url(../imgs/ocean-wallpapers-marvelous-hd-desktop-wallpapers-of-ocean-free-download.jpg);
+  font-family: 'Indie Flower', cursive;
 }
 
 .form-inline{
@@ -8,13 +9,10 @@ body{
 
 .intro {
   margin-top: 150px;
-  font-family: 'Indie Flower', cursive;
-  /*color: white;*/
 }
 
 .signup{
   color: white;
-  font-family: 'Indie Flower', cursive;
 }
 
 .navbar{

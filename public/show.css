@@ -15,7 +15,8 @@
 
 body{
     font-family: 'Indie Flower', cursive;
-}
+    /*background-image: url(http://orig07.deviantart.net/4dc8/f/2013/189/0/e/soft_blue_background_by_omfkg-d6c2qeb.jpg); */
+  }
 
 .modal-header{
   background-color: rgb(0, 115, 153);
@@ -42,8 +43,6 @@ h4 > span{
 .navbar{
   opacity: .70;
 }
-
-
 
 .page-scroll{
   margin-right: 41px;
