@@ -179,6 +179,21 @@ app.get("/logs/:id", function (req,res){
 app.get("/users/:user_id/posts/:id/edit", function (req,res){
 });
 
+//DELETE
+app.delete("/logs/:id", function (req,res){
+  console.log("INSIDE DELETE!!!");
+  console.log("REQ.SESSION ID", req.session);
+  db.Log.findById(req.params.id, function (err,log){
+    if(err){
+      console.log(err);
+      // res.redirect("/users/" + req.session.id);
+    }else{
+      log.remove();
+      res.redirect("/users/" + req.session.id);
+    }
+  });
+});
+
 //CREATE
 app.post("/logs", function (req,res){
   var spot = spotId(req.body.log.location);

@@ -1,7 +1,6 @@
 $(document).ready(function() {
 
 /***** CURRENT FORECAST ********/
-
 // 1) Onchange, grab value (use jQuery)
 var currentVal = $('.form-control').val();  
 
@@ -39,7 +38,6 @@ $("#select").on("change", function(e){
     }).fail(function(err){
         console.log("SOMETHING WENT WRONG",err);
     });
-
 });
 /****************************************/
 /******* GRAB HIDDEN INPUT VALUES FROM DOM  **********/
@@ -65,7 +63,6 @@ var idArray = $('.id').map(function() {return $(this).val(); });
 
 
 /*******************************************************/
-
 /***** MAKING A NEW CALENDAR EVENTS   ***********/
 var log = new Array();
 for(var i = 0; i < locationArray.length; i++)
@@ -132,6 +129,8 @@ $('#calendar').fullCalendar({
         }).done(function(serverResponse){
             $('#myModal .modal-body').empty();
             $('#myModal .modal-header').empty();
+            $('#myModal .modal-footer a').remove();
+            $('#myModal .modal-footer form').remove();
             $('#myModal .modal-header').append("<h3 id='logSpot' >" + serverResponse.location + "</h3>");
             $('#myModal .modal-header #logSpot').append("<span id='logTime'>" + "  (" + time + ")" + "</span>");
 
@@ -142,6 +141,10 @@ $('#calendar').fullCalendar({
             $('#myModal .modal-body #logSize').append('<span>'  + serverResponse.size_ft +  ' ft</span>');
             $('#myModal .modal-body').append('<h5 id="logShape"> Shape: </h5>'); 
             $('#myModal .modal-body #logShape').append('<span>'  + serverResponse.shape + '</span>');
+
+            //Add Delete button
+            $('#myModal .modal-footer').append('<form action="/logs/' + calEvent.id + '?_method=DELETE" method="POST" class="pull-left"><button type="submit" class="btn btn-danger pull-left">Delete</button></form>');
+            //<a href="#" class="btn btn-danger pull-left">Delete</a>
 
             //toggle modal when clicked
             $('#myModal').modal('toggle');
