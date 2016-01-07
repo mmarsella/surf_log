@@ -50,6 +50,21 @@ h4 > span{
 }
 
 #about{
-    float: right;
     margin-top: 16px;
+}
+
+#mark{
+    font-size: 24px;
+    margin-bottom: -5px;
+}
+
+#contact{
+  margin-bottom: -2px;
+}
+
+/*less than or equal to 500px*/
+@media(max-width:768px){
+  #about{
+    margin-top: 9px;
+  }
 }

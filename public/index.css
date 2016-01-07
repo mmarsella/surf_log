@@ -24,10 +24,8 @@ body{
 }
 
 .logout{
-
   margin-top: -5px;
   padding: 3px 6px;
-  
 }
 
 .modal-header{
@@ -43,6 +41,27 @@ body{
 }
 
 #about{
-    float: right;
-    margin-top: 16px;
+  margin-top: 16px;
+}
+
+/*less than or equal to 500px*/
+@media(max-width:768px){
+  #about{
+    margin-top: 9px;
+  }
+}
+
+#mark{
+    font-size: 24px;
+    margin-bottom: -5px;
+}
+
+#contact{
+  margin-bottom: -2px;
+}
+
+@media(min-width:400px) {
+   .navbar-collapse {
+    width: auto;
+    /* more code here */
 }
