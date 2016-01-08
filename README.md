@@ -5,7 +5,7 @@ Surf Log is a web application that allows bay area surfers to associate accurate
 
 Play around with it here:  https://surf-log.herokuapp.com
 
-![alt tag](https://cloud.githubusercontent.com/assets/12140339/12106156/3935343e-b311-11e5-924f-f7eaf728f625.png)
+![alt tag](https://cloud.githubusercontent.com/assets/12140339/12187110/c2a1250e-b55d-11e5-9554-ffbdc19039e6.png)
 
 Built on Node.js, Express.js, Mongoose and the SpitCast API on the back end with Javascript, jQuery and Bootstrap on the front end.
 
